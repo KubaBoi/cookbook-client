@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls;
 
-namespace CookBook.Views;
+namespace AvaloniaApplication1.Views;
 
 public partial class MainWindow : Window
 {
