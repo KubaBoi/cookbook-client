@@ -1,5 +1,9 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Color x:Key="PrimaryColor">#FF3498db</Color>
-    <Color x:Key="SecondaryColor">#FF2ecc71</Color>
-    <Color x:Key="BackgroundColor">#FFff00ff</Color>
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="MainBackground">#FF2c3639</Color>
+    <Color x:Key="SecondaryBackground">#FF3f4e4f</Color>
+    <Color x:Key="Secondary">#FFf6cf65</Color>
+    <Color x:Key="Primary">#FFdcd7c9</Color>
+    <Color x:Key="LightSecondary">#FFfdebb9</Color>
+    <Color x:Key="Attention">#FFe78686</Color>
 </ResourceDictionary>

@@ -53,6 +53,10 @@ public partial class App : Application
         collection.AddSingleton<IFileService, FileService>();
         collection.AddSingleton<IHttpService, HttpService>();
         collection.AddSingleton<IRecipeService, RecipeService>();
+
+        collection.AddTransient<RecipeDetailView>();
+
         collection.AddTransient<MainViewModel>();
+        collection.AddTransient<RecipeDetailViewModel>();
     }
 }
