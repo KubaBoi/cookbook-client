@@ -14,6 +14,6 @@ public partial class RecipeDetailViewModel : ViewModelBase
     }
 
     [ObservableProperty]
-    public string _text = "Ahoj";
+    public string _text = "Koláč s čokoládou";
 }
 
