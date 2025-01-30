@@ -1,5 +1,5 @@
 using Avalonia.Controls;
-using CookBook.ViewModels;
+using CookBook.ViewModels.RecipeDetail;
 
 namespace CookBook.Views;
 public partial class RecipeDetailView : UserControl

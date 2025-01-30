@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:CookBook.ViewModels"
+             xmlns:vm="clr-namespace:CookBook.ViewModels.RecipeDetail"
              d:DesignHeight="600"
              d:DesignWidth="1024"
              x:DataType="vm:RecipeDetailViewModel"
@@ -13,6 +13,7 @@
           ColumnDefinitions="242 * 242"
           RowDefinitions="80 *">
 
+        <!--  Recipe name  -->
         <TextBlock Grid.Row="0"
                    Grid.Column="0"
                    Grid.ColumnSpan="2"
@@ -22,18 +23,40 @@
                    Foreground="{DynamicResource Primary}"
                    Text="{Binding Text}" />
 
+        <!--  Ingredience  -->
         <Border Grid.Row="1"
                 Grid.Column="0"
-                Background="AliceBlue" />
+                Background="{DynamicResource SecondaryBackground}"
+                CornerRadius="0,8,0,0">
+            <DockPanel LastChildFill="False">
 
+                <!--  Portions  -->
+                <StackPanel Height="60"
+                            DockPanel.Dock="Top">
+
+                </StackPanel>
+
+                <!--  Spliter  -->
+                <Border Height="1"
+                        Background="{DynamicResource MainBackground}"
+                        DockPanel.Dock="Top" />
+
+                <!--  List of ingredients  -->
+            </DockPanel>
+        </Border>
+
+        <!--  Recipe steps  -->
         <Border Grid.Row="1"
-                Grid.Column="1"
-                Background="Red" />
-        
+                Grid.Column="1">
+
+        </Border>
+
+        <!--  Timers  -->
         <Border Grid.Row="0"
-                Grid.Column="2"
                 Grid.RowSpan="2"
-                Background="Blue" />
+                Grid.Column="2">
+
+        </Border>
 
     </Grid>
 

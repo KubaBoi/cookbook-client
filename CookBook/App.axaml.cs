@@ -5,9 +5,9 @@ using Avalonia.Markup.Xaml;
 using CookBook.Services.Abstractions;
 using CookBook.Services.Core;
 using CookBook.ViewModels;
+using CookBook.ViewModels.RecipeDetail;
 using CookBook.Views;
 using Microsoft.Extensions.DependencyInjection;
-using System.Security.Authentication.ExtendedProtection;
 
 namespace CookBook;
 
