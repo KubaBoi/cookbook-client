@@ -21,7 +21,7 @@
                    FontSize="40"
                    FontWeight="SemiBold"
                    Foreground="{DynamicResource Primary}"
-                   Text="{Binding Text}" />
+                   Text="{Binding MainTitle}" />
 
         <!--  Ingredience  -->
         <Border Grid.Row="1"

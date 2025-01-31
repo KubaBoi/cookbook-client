@@ -10,5 +10,6 @@
         d:DesignWidth="800"
         Icon="/Assets/avalonia-logo.ico"
         mc:Ignorable="d">
-    <views:MainView />
+    <!--<views:MainView />-->
+    <ContentControl Content="{Binding CurrentView}" />
 </Window>

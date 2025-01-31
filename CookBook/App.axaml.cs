@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
@@ -6,8 +7,11 @@ using CookBook.Services.Abstractions;
 using CookBook.Services.Core;
 using CookBook.ViewModels;
 using CookBook.ViewModels.RecipeDetail;
+using CookBook.ViewModels.Timers;
 using CookBook.Views;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace CookBook;
 
@@ -24,39 +28,46 @@ public partial class App : Application
         // Without this line you will get duplicate validations from both Avalonia and CT
         BindingPlugins.DataValidators.RemoveAt(0);
 
-        var collection = new ServiceCollection();
-        AddCommonServices(collection);
+        var services = new ServiceCollection();
+        AddCommonServices(services);
 
-        var services = collection.BuildServiceProvider();
+        var serv = services.BuildServiceProvider();
 
-        var vm = services.GetRequiredService<MainViewModel>();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = vm
-            };
+            desktop.MainWindow = serv.GetRequiredService<MainWindow>();
         }
-        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
-        {
-            singleViewPlatform.MainView = new MainView
-            {
-                DataContext = vm
-            };
-        }
+        //else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+        //{
+        //    singleViewPlatform.MainView = serv.GetRequiredService<MainView>();
+        //}
 
         base.OnFrameworkInitializationCompleted();
     }
 
-    private void AddCommonServices(IServiceCollection collection)
+    private void AddCommonServices(IServiceCollection services)
     {
-        collection.AddSingleton<IFileService, FileService>();
-        collection.AddSingleton<IHttpService, HttpService>();
-        collection.AddSingleton<IRecipeService, RecipeService>();
+        services.AddSingleton<IFileService, FileService>();
+        services.AddSingleton<IHttpService, HttpService>();
+        services.AddSingleton<IRecipeService, RecipeService>();
+        services.AddSingleton<INavigationService, NavigationService>();
 
-        collection.AddTransient<RecipeDetailView>();
+        //services.AddView<MainView, MainViewModel>(ServiceLifetime.Singleton);
+        services.AddView<RecipeDetailView, RecipeDetailViewModel>();
+        services.AddView<TimersView, TimersViewModel>();
 
-        collection.AddTransient<MainViewModel>();
-        collection.AddTransient<RecipeDetailViewModel>();
+        services.AddSingleton<MainViewModel>();
+        services.AddSingleton<MainWindow>();
+    }
+}
+
+public static class Ext
+{
+    public static IServiceCollection AddView<TView, TViewModel>(this IServiceCollection services,
+                                                                ServiceLifetime serviceLifetime = ServiceLifetime.Transient) where TView : UserControl where TViewModel : ViewModelBase
+    {
+        services.Add(new ServiceDescriptor(typeof(TView), typeof(TView), ServiceLifetime.Transient));
+        services.Add(new ServiceDescriptor(typeof(TViewModel), typeof(TViewModel), ServiceLifetime.Transient));
+        return services;
     }
 }
