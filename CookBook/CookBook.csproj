@@ -10,7 +10,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Resource Include="Assets\Colors.axaml" />
+        <AvaloniaResource Include="Assets\Colors.axaml" />
+        <AvaloniaResource Include="Assets\Icons.axaml" />
     </ItemGroup>
 
     <ItemGroup>
@@ -26,7 +27,13 @@
 
     <ItemGroup>
         <AvaloniaResource Update="Assets\Colors.axaml">
-            <SubType>Designer</SubType>
+          <SubType>Designer</SubType>
+        </AvaloniaResource>
+        <AvaloniaResource Update="Assets\Icons.axaml">
+          <SubType>Designer</SubType>
+        </AvaloniaResource>
+        <AvaloniaResource Update="Assets\Styles\IconRectangleButton.axaml">
+          <SubType>Designer</SubType>
         </AvaloniaResource>
     </ItemGroup>
 </Project>

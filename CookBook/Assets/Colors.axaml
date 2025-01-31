@@ -1,5 +1,54 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top"
+                           Text="MainBackground" />
+                <Border Width="100"
+                        Height="30"
+                        Background="{DynamicResource MainBackground}"
+                        DockPanel.Dock="Top" />
+
+                <TextBlock DockPanel.Dock="Top"
+                           Text="SecondaryBackground" />
+                <Border Width="100"
+                        Height="30"
+                        Background="{DynamicResource SecondaryBackground}"
+                        DockPanel.Dock="Top" />
+
+                <TextBlock DockPanel.Dock="Top"
+                           Text="Secondary" />
+                <Border Width="100"
+                        Height="30"
+                        Background="{DynamicResource Secondary}"
+                        DockPanel.Dock="Top" />
+
+                <TextBlock DockPanel.Dock="Top"
+                           Text="Primary" />
+                <Border Width="100"
+                        Height="30"
+                        Background="{DynamicResource Primary}"
+                        DockPanel.Dock="Top" />
+
+                <TextBlock DockPanel.Dock="Top"
+                           Text="LightSecondary" />
+                <Border Width="100"
+                        Height="30"
+                        Background="{DynamicResource LightSecondary}"
+                        DockPanel.Dock="Top" />
+
+                <TextBlock DockPanel.Dock="Top"
+                           Text="Attention" />
+                <Border Width="100"
+                        Height="30"
+                        Background="{DynamicResource Attention}"
+                        DockPanel.Dock="Top" />
+
+            </DockPanel>
+        </Border>
+    </Design.PreviewWith>
+
     <Color x:Key="MainBackground">#FF2c3639</Color>
     <Color x:Key="SecondaryBackground">#FF3f4e4f</Color>
     <Color x:Key="Secondary">#FFf6cf65</Color>

@@ -1,0 +1,32 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Design.PreviewWith>
+        <Border>
+            <DockPanel>
+                <Path Width="30"
+                      Height="30"
+                      Data="{StaticResource MinusIcon_Path}"
+                      DockPanel.Dock="Top"
+                      Stroke="Red"
+                      StrokeThickness="1" />
+                <TextBlock DockPanel.Dock="Top"
+                           Text="MinusIcon_Path" />
+
+                <Path Width="30"
+                      Height="30"
+                      Data="{StaticResource PlusIcon_Path}"
+                      DockPanel.Dock="Top"
+                      Stroke="Red"
+                      StrokeThickness="1" />
+                <TextBlock DockPanel.Dock="Top"
+                           Text="PlusIcon_Path" />
+
+            </DockPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <StreamGeometry x:Key="MinusIcon_Path">F1 M6.25 15L23.75 15</StreamGeometry>
+    <StreamGeometry x:Key="PlusIcon_Path">F1 M5 12L19 12 F1 M12 5L12 19</StreamGeometry>
+
+</ResourceDictionary>

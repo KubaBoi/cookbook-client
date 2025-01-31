@@ -33,7 +33,9 @@
                 <!--  Portions  -->
                 <StackPanel Height="60"
                             DockPanel.Dock="Top">
-
+                    <!--  Minus button  -->
+                    <Button Classes="icon-rectangle"
+                            Tag="{StaticResource MinusIcon_Path}" />
                 </StackPanel>
 
                 <!--  Spliter  -->

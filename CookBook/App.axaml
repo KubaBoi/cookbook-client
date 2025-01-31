@@ -1,18 +1,18 @@
-<Application
-    x:Class="CookBook.App"
-    xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    RequestedThemeVariant="Default">
-    <!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
+<Application x:Class="CookBook.App"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             RequestedThemeVariant="Default">
 
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="/Assets/Styles/IconRectangleButton.axaml" />
     </Application.Styles>
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <MergeResourceInclude Source="/Assets/Colors.axaml" />
+                <MergeResourceInclude Source="Assets/Colors.axaml" />
+                <MergeResourceInclude Source="Assets/Icons.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,0 +1,39 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20"
+                Background="{DynamicResource MainBackground}">
+            <Button Classes="icon-rectangle"
+                    Tag="{StaticResource MinusIcon_Path}" />
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="Button.icon-rectangle">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Background" Value="{DynamicResource Secondary}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Button x:Name="butt"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="8">
+                        <Path Width="18"
+                              Data="{TemplateBinding Tag}"
+                              Stretch="Fill"
+                              Stroke="{DynamicResource SecondaryBackground}"
+                              StrokeThickness="4" />
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="Blue" />
+        </Style>
+    </Style>
+</Styles>
