@@ -32,7 +32,7 @@
         <AvaloniaResource Update="Assets\Icons.axaml">
           <SubType>Designer</SubType>
         </AvaloniaResource>
-        <AvaloniaResource Update="Assets\Styles\IconRectangleButton.axaml">
+        <AvaloniaResource Update="Assets\Styles\IconSquareButton.axaml">
           <SubType>Designer</SubType>
         </AvaloniaResource>
     </ItemGroup>

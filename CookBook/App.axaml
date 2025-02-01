@@ -5,7 +5,7 @@
 
     <Application.Styles>
         <FluentTheme />
-        <StyleInclude Source="/Assets/Styles/IconRectangleButton.axaml" />
+        <StyleInclude Source="/Assets/Styles/IconSquareButton.axaml" />
     </Application.Styles>
 
     <Application.Resources>
