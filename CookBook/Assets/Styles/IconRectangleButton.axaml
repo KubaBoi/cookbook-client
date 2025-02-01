@@ -3,37 +3,36 @@
     <Design.PreviewWith>
         <Border Padding="20"
                 Background="{DynamicResource MainBackground}">
-            <Button Classes="icon-rectangle"
+            <Button Classes="icon-square"
                     Tag="{StaticResource MinusIcon_Path}" />
         </Border>
     </Design.PreviewWith>
 
-    <Style Selector="Button.icon-rectangle">
+    <Style Selector="Button.icon-square">
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Background" Value="{DynamicResource Secondary}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Button x:Name="butt"
-                            Width="{TemplateBinding Width}"
-                            Height="{TemplateBinding Height}"
-                            HorizontalContentAlignment="Center"
-                            VerticalContentAlignment="Center"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="8">
-                        <Path Width="18"
-                              Data="{TemplateBinding Tag}"
-                              Stretch="Fill"
-                              Stroke="{DynamicResource SecondaryBackground}"
-                              StrokeThickness="4" />
-                    </Button>
-                </ControlTemplate>
-            </Setter.Value>
+            <ControlTemplate>
+                <Border Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="8">
+                    <Path Width="18"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Data="{TemplateBinding Tag}"
+                          Stretch="Fill"
+                          Stroke="{DynamicResource SecondaryBackground}"
+                          StrokeThickness="4" />
+                </Border>
+            </ControlTemplate>
         </Setter>
 
         <Style Selector="^:pressed">
-            <Setter Property="Background" Value="Blue" />
+            <Setter Property="Background" Value="{DynamicResource LightSecondary}" />
         </Style>
     </Style>
 </Styles>

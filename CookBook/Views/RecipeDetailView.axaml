@@ -34,7 +34,7 @@
                 <StackPanel Height="60"
                             DockPanel.Dock="Top">
                     <!--  Minus button  -->
-                    <Button Classes="icon-rectangle"
+                    <Button Classes="icon-square"
                             Tag="{StaticResource MinusIcon_Path}" />
                 </StackPanel>
 
