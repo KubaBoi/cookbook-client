@@ -35,6 +35,7 @@
                             DockPanel.Dock="Top">
                     <!--  Minus button  -->
                     <Button Classes="icon-square"
+                            Command="{Binding MinusPortionCommand}"
                             Tag="{StaticResource MinusIcon_Path}" />
                 </StackPanel>
 

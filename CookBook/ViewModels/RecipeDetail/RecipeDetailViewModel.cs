@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CookBook.Models;
 using CookBook.Services.Abstractions;
+using System.Diagnostics.CodeAnalysis;
+using System.Windows.Input;
 
 namespace CookBook.ViewModels.RecipeDetail;
 public partial class RecipeDetailViewModel : ViewModelBase
@@ -19,6 +22,8 @@ public partial class RecipeDetailViewModel : ViewModelBase
         _recipeService = recipeService;
 
         _recipe = _recipeService.SelectedRecipe;
+
+        InitCommands();
     }
 
     [ObservableProperty]
@@ -26,5 +31,31 @@ public partial class RecipeDetailViewModel : ViewModelBase
 
     [ObservableProperty]
     public Recipe? _recipe;
+
+    #region Commands
+
+    [ObservableProperty]
+    public ICommand _minusPortionCommand;
+
+    #endregion
+
+    #region Command methods
+
+    [MemberNotNull(nameof(MinusPortionCommand))]
+    private void InitCommands()
+    {
+        MinusPortionCommand = new RelayCommand(MinusPortion);
+    }
+
+    private void MinusPortion()
+    {
+        string a = "";
+    }
+
+    #endregion
+
+    #region Public methods
+
+    #endregion
 }
 
