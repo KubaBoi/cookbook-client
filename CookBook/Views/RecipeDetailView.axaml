@@ -32,11 +32,28 @@
 
                 <!--  Portions  -->
                 <StackPanel Height="60"
-                            DockPanel.Dock="Top">
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            DockPanel.Dock="Top"
+                            Orientation="Horizontal"
+                            Spacing="30">
                     <!--  Minus button  -->
-                    <Button Classes="icon-square"
+                    <Button Classes="icon-square-si"
                             Command="{Binding MinusPortionCommand}"
+                            IsEnabled="{Binding IsMinusPortionButtonEnabled}"
                             Tag="{StaticResource MinusIcon_Path}" />
+
+                    <!--  Portion counter  -->
+                    <TextBlock FontSize="20"  
+                               VerticalAlignment="Center"
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource Primary}"
+                               Text="{Binding PortionCounter}" />
+
+                    <!--  Plus button  -->
+                    <Button Classes="icon-square"
+                            Command="{Binding PlusPortionCommand}"
+                            Tag="{StaticResource PlusIcon_Path}" />
                 </StackPanel>
 
                 <!--  Spliter  -->
