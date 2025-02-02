@@ -43,12 +43,16 @@
                             IsEnabled="{Binding IsMinusPortionButtonEnabled}"
                             Tag="{StaticResource MinusIcon_Path}" />
 
-                    <!--  Portion counter  -->
-                    <TextBlock FontSize="20"  
-                               VerticalAlignment="Center"
-                               FontWeight="SemiBold"
-                               Foreground="{DynamicResource Primary}"
-                               Text="{Binding PortionCounter}" />
+                    <!--  Portion counter  (42 to fit 3 digits) -->
+                    <DockPanel Width="42"
+                               HorizontalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource Primary}"
+                                   Text="{Binding PortionCounter}" />
+                    </DockPanel>
 
                     <!--  Plus button  -->
                     <Button Classes="icon-square"

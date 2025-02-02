@@ -1,18 +1,20 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
-        <Border Padding="20"
-                Background="{DynamicResource MainBackground}">
+        <Border Padding="20">
             <DockPanel>
-                <Button Classes="icon-square-si"
+                <Button Margin="0,0,0,5"
+                        Classes="icon-square-si"
                         DockPanel.Dock="Top"
                         Tag="{StaticResource MinusIcon_Path}" />
 
-                <Button Classes="icon-square"
+                <Button Margin="0,0,0,5"
+                        Classes="icon-square"
                         DockPanel.Dock="Top"
                         Tag="{StaticResource PlusIcon_Path}" />
 
-                <Button Classes="icon-square"
+                <Button Margin="0,0,0,5"
+                        Classes="icon-square"
                         DockPanel.Dock="Top"
                         IsEnabled="false"
                         Tag="{StaticResource PlusIcon_Path}" />
@@ -20,7 +22,7 @@
         </Border>
     </Design.PreviewWith>
 
-    <Style Selector="Button.icon-square">
+    <Style Selector="Button.icon-square, Button.icon-square-si">
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Background" Value="{DynamicResource Secondary}" />
@@ -42,35 +44,9 @@
             </ControlTemplate>
         </Setter>
 
-        <Style Selector="^:pressed">
-            <Setter Property="Background" Value="{DynamicResource LightSecondary}" />
+        <Style Selector="^.icon-square-si Path">
+            <Setter Property="Height" Value="0" />
         </Style>
-
-        <Style Selector="^:disabled">
-            <Setter Property="Background" Value="{DynamicResource Primary}" />
-        </Style>
-    </Style>
-
-    <Style Selector="Button.icon-square-si">
-        <Setter Property="Width" Value="40" />
-        <Setter Property="Height" Value="40" />
-        <Setter Property="Background" Value="{DynamicResource Secondary}" />
-        <Setter Property="Template">
-            <ControlTemplate>
-                <Border Width="{TemplateBinding Width}"
-                        Height="{TemplateBinding Height}"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="8">
-                    <Path Width="20"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          Data="{TemplateBinding Tag}"
-                          Stretch="Fill"
-                          Stroke="{DynamicResource SecondaryBackground}"
-                          StrokeThickness="4" />
-                </Border>
-            </ControlTemplate>
-        </Setter>
 
         <Style Selector="^:pressed">
             <Setter Property="Background" Value="{DynamicResource LightSecondary}" />
