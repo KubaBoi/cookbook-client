@@ -49,10 +49,10 @@
         </Border>
     </Design.PreviewWith>
 
-    <Color x:Key="MainBackground">#FF2c3639</Color>
-    <Color x:Key="SecondaryBackground">#FF3f4e4f</Color>
-    <Color x:Key="Secondary">#FFf6cf65</Color>
-    <Color x:Key="Primary">#FFdcd7c9</Color>
-    <Color x:Key="LightSecondary">#FFfdebb9</Color>
-    <Color x:Key="Attention">#FFe78686</Color>
+    <SolidColorBrush x:Key="SecondaryBackground">#FF3f4e4f</SolidColorBrush>
+    <SolidColorBrush x:Key="MainBackground">#FF2c3639</SolidColorBrush>
+    <SolidColorBrush x:Key="Secondary">#FFf6cf65</SolidColorBrush>
+    <SolidColorBrush x:Key="Primary">#FFdcd7c9</SolidColorBrush>
+    <SolidColorBrush x:Key="LightSecondary">#FFfdebb9</SolidColorBrush>
+    <SolidColorBrush x:Key="Attention">#FFe78686</SolidColorBrush>
 </ResourceDictionary>

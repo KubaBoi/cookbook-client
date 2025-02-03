@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using CookBook.Models;
 using CookBook.Services.Abstractions;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 
@@ -16,6 +18,17 @@ public partial class RecipeDetailViewModel : ViewModelBase
     {
         _mainTitle = "Koláč s čokoládou";
         _portionCounter = 4;
+
+        _ingredients = new List<IngredientViewModel>
+        {
+            new IngredientViewModel(5, "krát", "párek", _portionCounter),
+            new IngredientViewModel(4, "ks", "cibule", _portionCounter),
+            new IngredientViewModel(5, "lžic", "oleje", _portionCounter),
+            new IngredientViewModel(700, "g", "rybízu", _portionCounter),
+            new IngredientViewModel("Na drobenku"),
+            new IngredientViewModel(4, "PL", "Krupicový cukr", _portionCounter),
+            new IngredientViewModel(1, "bal", "Vanilkový cukraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", _portionCounter),
+        };
     }
 
     public RecipeDetailViewModel(IRecipeService recipeService)
@@ -25,21 +38,37 @@ public partial class RecipeDetailViewModel : ViewModelBase
         _recipe = _recipeService.SelectedRecipe;
 
         InitCommands();
+
+        _portionCounter = 4;
+
+        _ingredients = new List<IngredientViewModel>
+        {
+            new IngredientViewModel(5, "krát", "párek", _portionCounter),
+            new IngredientViewModel(4, "ks", "cibule", _portionCounter),
+            new IngredientViewModel(5, "lžic", "oleje", _portionCounter),
+            new IngredientViewModel(700, "g", "rybízu", _portionCounter),
+            new IngredientViewModel("Na drobenku"),
+            new IngredientViewModel(4, "PL", "Krupicový cukr", _portionCounter),
+            new IngredientViewModel(1, "bal", "Vanilkový cukraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", _portionCounter),
+        };
     }
 
     #region Properties
 
     [ObservableProperty]
-    public Recipe? _recipe;
+    private Recipe? _recipe;
 
     [ObservableProperty]
-    public string? _mainTitle;
+    private string? _mainTitle;
 
     [ObservableProperty]
-    public int? _portionCounter = 2;
+    private int? _portionCounter;
 
     [ObservableProperty]
-    public bool _isMinusPortionButtonEnabled = true;
+    private bool _isMinusPortionButtonEnabled = true;
+
+    [ObservableProperty]
+    private List<IngredientViewModel> _ingredients;
 
     #endregion
 
@@ -75,17 +104,32 @@ public partial class RecipeDetailViewModel : ViewModelBase
         {
             IsMinusPortionButtonEnabled = false;
         }
+
+        RecalculateIngredientCounts();
     }
 
     private void PlusPortion()
     {
         PortionCounter++;
         IsMinusPortionButtonEnabled = true;
+        RecalculateIngredientCounts();
     }
 
     #endregion
 
     #region Public methods
+
+    #endregion
+
+    #region Private methods
+
+    private void RecalculateIngredientCounts()
+    {
+        foreach (var ing in Ingredients)
+        {
+            ing.Count = ing.NormalCount * PortionCounter;
+        }
+    }
 
     #endregion
 }

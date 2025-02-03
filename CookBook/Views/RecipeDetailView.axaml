@@ -1,6 +1,7 @@
 <UserControl x:Class="CookBook.Views.RecipeDetailView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CookBook.Converters;assembly=CookBook"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:CookBook.ViewModels.RecipeDetail"
@@ -43,7 +44,7 @@
                             IsEnabled="{Binding IsMinusPortionButtonEnabled}"
                             Tag="{StaticResource MinusIcon_Path}" />
 
-                    <!--  Portion counter  (42 to fit 3 digits) -->
+                    <!--  Portion counter  (42 to fit 3 digits)  -->
                     <DockPanel Width="42"
                                HorizontalAlignment="Center">
                         <TextBlock HorizontalAlignment="Center"
@@ -66,6 +67,56 @@
                         DockPanel.Dock="Top" />
 
                 <!--  List of ingredients  -->
+                <ItemsControl Padding="10,0"
+                              Grid.IsSharedSizeScope="True"
+                              ItemsSource="{Binding Ingredients}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"
+                                                      SharedSizeGroup="A" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*"
+                                                      SharedSizeGroup="B" />
+                                </Grid.ColumnDefinitions>
+
+                                <!--  Count and unit  -->
+                                <TextBlock Grid.Column="0"
+                                           MaxWidth="70"
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource Primary}"
+                                           IsVisible="{Binding !IsTitle}"
+                                           TextWrapping="Wrap">
+                                    <Run Text="{Binding Count}" />
+                                    <Run Text="{Binding Unit}" />
+                                </TextBlock>
+
+                                <!--  Name of ingredient  -->
+                                <TextBlock Grid.Column="2"
+                                           Width="160"
+                                           FontSize="14"
+                                           FontWeight="Normal"
+                                           Foreground="{DynamicResource Primary}"
+                                           IsVisible="{Binding !IsTitle}"
+                                           Text="{Binding Name}"
+                                           TextWrapping="Wrap" />
+
+                                <!--  Name of title  -->
+                                <TextBlock Grid.Column="2"
+                                           Width="170"
+                                           Margin="0,19,0,6"
+                                           FontSize="16"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource Secondary}"
+                                           IsVisible="{Binding IsTitle}"
+                                           Text="{Binding Name}"
+                                           TextWrapping="Wrap" />
+
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </DockPanel>
         </Border>
 
