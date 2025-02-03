@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 namespace CookBook.Models;
 public class Ingredient
 {
+    public Ingredient(string? name, string? amount)
+    {
+        Name = name;
+        Amount = amount;
+    }
+
     /// <summary>
     /// Name of ingredient. (mrkev, vejce, ...)
     /// </summary>

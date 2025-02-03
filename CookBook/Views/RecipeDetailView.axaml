@@ -124,7 +124,9 @@
         <!--  Recipe steps  -->
         <Border Grid.Row="1"
                 Grid.Column="1">
-
+            <ItemsControl>
+                
+            </ItemsControl>
         </Border>
 
         <!--  Timers  -->
