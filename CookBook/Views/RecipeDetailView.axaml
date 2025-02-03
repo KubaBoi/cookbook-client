@@ -83,6 +83,7 @@
 
                                 <!--  Count and unit  -->
                                 <TextBlock Grid.Column="0"
+                                           Margin="0,1"
                                            MaxWidth="70"
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource Primary}"
