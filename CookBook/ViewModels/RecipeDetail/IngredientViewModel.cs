@@ -13,12 +13,19 @@ public partial class IngredientViewModel : ObservableObject
         _name = name;
         _isTitle = true;
     }
-    public IngredientViewModel(int count, string unit, string name, int? defaultPortions)
+
+    public IngredientViewModel(string name, string amountText)
+    {
+        _name = name;
+        _unit = amountText;
+    }
+
+    public IngredientViewModel(double? count, string? unit, string name, int? defaultPortions)
     {
         _count = count;
         _unit = unit;
         _name = name;
-        _normalCount = (double)count / defaultPortions;
+        _normalCount = count / defaultPortions;
     }
 
     /// <summary>

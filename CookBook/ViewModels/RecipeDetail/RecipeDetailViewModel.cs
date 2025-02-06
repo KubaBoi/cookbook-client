@@ -41,28 +41,18 @@ public partial class RecipeDetailViewModel : ViewModelBase
             },
             Ingredients = new List<Ingredient>
             {
-                new Ingredient("párek", "5 krát"),
-                new Ingredient("cibule", "4 ks"),
-                new Ingredient("oleje", "5 lžic"),
-                new Ingredient("rybízu", "700 g"),
-                new Ingredient("Na drobenku", null),
-                new Ingredient("Krupicový cukr", "5 krát"),
-                new Ingredient("párek", "5 krát"),
-                new Ingredient("Vanilkový cukraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "5 krát"),
+                new Ingredient("párek", 5, "krát"),
+                new Ingredient("cibule", 4, "ks"),
+                new Ingredient("oleje", 5, "lžic"),
+                new Ingredient("rybízu", 700, "g"),
+                new Ingredient("Na drobenku"),
+                new Ingredient("Krupicový cukr", 5, "krát"),
+                new Ingredient("párek", 5, "krát"),
+                new Ingredient("Vanilkový cukraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 5, "krát"),
             }
         };
 
-
-        _ingredients = new List<IngredientViewModel>
-        {
-            new IngredientViewModel(5, "krát", "párek", _portionCounter),
-            new IngredientViewModel(4, "ks", "cibule", _portionCounter),
-            new IngredientViewModel(5, "lžic", "oleje", _portionCounter),
-            new IngredientViewModel(700, "g", "rybízu", _portionCounter),
-            new IngredientViewModel("Na drobenku"),
-            new IngredientViewModel(4, "PL", "Krupicový cukr", _portionCounter),
-            new IngredientViewModel(1, "bal", "Vanilkový cukraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", _portionCounter),
-        };
+        InitIngredients();
     }
 
     public RecipeDetailViewModel(IRecipeService recipeService)
@@ -103,6 +93,9 @@ public partial class RecipeDetailViewModel : ViewModelBase
 
     [ObservableProperty]
     private List<IngredientViewModel> _ingredients;
+
+    [ObservableProperty]
+    private List<string> _steps;
 
     #endregion
 
@@ -153,6 +146,15 @@ public partial class RecipeDetailViewModel : ViewModelBase
 
     #region Public methods
 
+    public void Init()
+    {
+        Recipe = _recipeService.SelectedRecipe;
+        if (Recipe is null) return;
+
+        PortionCounter = Recipe.Header?.Portions;
+        InitIngredients();
+    }
+
     #endregion
 
     #region Private methods
@@ -162,6 +164,34 @@ public partial class RecipeDetailViewModel : ViewModelBase
         foreach (var ing in Ingredients)
         {
             ing.Count = ing.NormalCount * PortionCounter;
+        }
+    }
+
+    private void InitIngredients()
+    {
+        if (Recipe is null) return;
+
+        Ingredients = new List<IngredientViewModel>(Recipe.Ingredients.Count);
+        foreach (var ing in Recipe.Ingredients)
+        {
+            if (ing.Name is null) continue;
+            if (ing.IsTitle)
+            {
+                // title
+                Ingredients.Add(new IngredientViewModel(ing.Name));
+            }
+            else
+            {
+                // ingredient
+                if (ing.Amount is not null)
+                {
+                    Ingredients.Add(new IngredientViewModel(ing.Amount, ing.Unit, ing.Name, PortionCounter));
+                }
+                else
+                {
+                    Ingredients.Add(new IngredientViewModel(ing.Name, ing.AmountText!));
+                }
+            }
         }
     }
 
