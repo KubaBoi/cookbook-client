@@ -83,8 +83,8 @@
 
                                 <!--  Count and unit  -->
                                 <TextBlock Grid.Column="0"
-                                           Margin="0,1"
                                            MaxWidth="70"
+                                           Margin="0,1"
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource Primary}"
                                            IsVisible="{Binding !IsTitle}"
@@ -123,9 +123,10 @@
 
         <!--  Recipe steps  -->
         <Border Grid.Row="1"
-                Grid.Column="1">
+                Grid.Column="1"
+                Padding="20">
             <ItemsControl ItemsSource="{Binding Recipe.Steps}">
-                
+
             </ItemsControl>
         </Border>
 
@@ -133,7 +134,30 @@
         <Border Grid.Row="0"
                 Grid.RowSpan="2"
                 Grid.Column="2">
-
+            <ItemsControl DockPanel.Dock="Top"
+                          Margin="0,17,0,0"
+                          ItemsSource="{Binding Timers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Height="100"
+                                Width="242"
+                                Background="{DynamicResource SecondaryBackground}"
+                                CornerRadius="8,0,0,8"
+                                Margin="0,3,0,0">
+                            <Grid RowDefinitions="Auto, *, 10"
+                                  ColumnDefinitions="*">
+                                <DockPanel Width="242">
+                                    <TextBlock Text="{Binding ElapsedText}" 
+                                               DockPanel.Dock="Left"
+                                               Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding StartText}"
+                                               DockPanel.Dock="Right"/>
+                                </DockPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Border>
 
     </Grid>

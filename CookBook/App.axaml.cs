@@ -51,6 +51,7 @@ public partial class App : Application
         services.AddSingleton<IHttpService, HttpService>();
         services.AddSingleton<IRecipeService, RecipeService>();
         services.AddSingleton<INavigationService, NavigationService>();
+        services.AddSingleton<ITimerService, TimerService>();
 
         //services.AddView<MainView, MainViewModel>(ServiceLifetime.Singleton);
         services.AddView<RecipeDetailView, RecipeDetailViewModel>();

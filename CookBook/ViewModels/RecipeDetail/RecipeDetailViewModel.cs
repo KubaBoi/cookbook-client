@@ -2,8 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using CookBook.Models;
 using CookBook.Services.Abstractions;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 
@@ -11,6 +11,7 @@ namespace CookBook.ViewModels.RecipeDetail;
 public partial class RecipeDetailViewModel : ViewModelBase
 {
     private readonly IRecipeService _recipeService;
+    private readonly ITimerService _timerService;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public RecipeDetailViewModel()
@@ -53,13 +54,22 @@ public partial class RecipeDetailViewModel : ViewModelBase
         };
 
         InitIngredients();
+
+        Timers = new List<CookingTimerViewModel>()
+        {
+            new CookingTimerViewModel(TimeSpan.FromSeconds(5)),
+            new CookingTimerViewModel(TimeSpan.FromSeconds(1000)),
+            new CookingTimerViewModel(TimeSpan.FromSeconds(150)),
+            new CookingTimerViewModel(TimeSpan.FromSeconds(20))
+        };
     }
 
-    public RecipeDetailViewModel(IRecipeService recipeService)
+    public RecipeDetailViewModel(
+        IRecipeService recipeService,
+        ITimerService timerService)
     {
         _recipeService = recipeService;
-
-        _recipe = _recipeService.SelectedRecipe;
+        _timerService = timerService;
 
         InitCommands();
 
@@ -97,6 +107,9 @@ public partial class RecipeDetailViewModel : ViewModelBase
     [ObservableProperty]
     private List<string> _steps;
 
+    [ObservableProperty]
+    private List<CookingTimerViewModel> _timers;
+
     #endregion
 
     #region Commands
@@ -126,7 +139,7 @@ public partial class RecipeDetailViewModel : ViewModelBase
         {
             PortionCounter--;
         }
-        
+
         if (PortionCounter <= 1)
         {
             IsMinusPortionButtonEnabled = false;
@@ -148,11 +161,21 @@ public partial class RecipeDetailViewModel : ViewModelBase
 
     public void Init()
     {
-        Recipe = _recipeService.SelectedRecipe;
-        if (Recipe is null) return;
+        _timerService.AddTimer(TimeSpan.FromSeconds(10));
 
-        PortionCounter = Recipe.Header?.Portions;
-        InitIngredients();
+        Recipe = _recipeService.SelectedRecipe;
+        //if (Recipe is null) return;
+
+        //PortionCounter = Recipe.Header?.Portions;
+        //InitIngredients();
+        InitTimers();
+
+        _timerService.AddEvent(UpdateTimers);
+    }
+
+    public void Dispose()
+    {
+        _timerService.RemoveEvent(UpdateTimers);
     }
 
     #endregion
@@ -194,6 +217,24 @@ public partial class RecipeDetailViewModel : ViewModelBase
             }
         }
     }
+
+    private void InitTimers()
+    {
+        Timers = new();
+        foreach (var timer in _timerService.GetTimers())
+        {
+            Timers.Add(new CookingTimerViewModel(timer));
+        }
+    }
+
+    private void UpdateTimers()
+    {
+        foreach (var timer in Timers)
+        {
+            timer.Update();
+        }
+    }
+
 
     #endregion
 }
