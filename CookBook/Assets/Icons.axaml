@@ -22,11 +22,64 @@
                 <TextBlock DockPanel.Dock="Top"
                            Text="PlusIcon_Path" />
 
+                <!-- Timer control icons -->
+                <Path Width="30"
+                      Height="30"
+                      Data="{StaticResource DownBigIcon_Path}"
+                      DockPanel.Dock="Top"
+                      Stroke="Red"
+                      StrokeThickness="1" />
+                <TextBlock DockPanel.Dock="Top"
+                           Text="DownBigIcon_Path" />
+
+                <Path Width="30"
+                      Height="30"
+                      Data="{StaticResource DownSmallIcon_Path}"
+                      DockPanel.Dock="Top"
+                      Stroke="Red"
+                      StrokeThickness="1" />
+                <TextBlock DockPanel.Dock="Top"
+                           Text="DownSmallIcon_Path" />
+
+                <Path Width="30"
+                      Height="30"
+                      Data="{StaticResource PauseIcon_Path}"
+                      DockPanel.Dock="Top"
+                      Stroke="Red"
+                      StrokeThickness="1" />
+                <TextBlock DockPanel.Dock="Top"
+                           Text="PauseIcon_Path" />
+
+                <Path Width="30"
+                      Height="30"
+                      Data="{StaticResource UpBigIcon_Path}"
+                      DockPanel.Dock="Top"
+                      Stroke="Red"
+                      StrokeThickness="1" />
+                <TextBlock DockPanel.Dock="Top"
+                           Text="UpBigIcon_Path" />
+
+                <Path Width="30"
+                      Height="30"
+                      Data="{StaticResource UpSmallIcon_Path}"
+                      DockPanel.Dock="Top"
+                      Stroke="Red"
+                      StrokeThickness="1" />
+                <TextBlock DockPanel.Dock="Top"
+                           Text="UpSmallIcon_Path" />
+
             </DockPanel>
         </Border>
     </Design.PreviewWith>
 
     <StreamGeometry x:Key="MinusIcon_Path">F1 M6.25 15L23.75 15</StreamGeometry>
     <StreamGeometry x:Key="PlusIcon_Path">F1 M5 12L19 12 F1 M12 5L12 19</StreamGeometry>
+    
+    <!-- Timer control icons -->
+    <StreamGeometry x:Key="DownBigIcon_Path">F1 M6.5 6.5L12.2093 12.2093L12.2093 12.2093C12.3698 12.3698 12.6302 12.3698 12.7907 12.2093L12.7907 12.2093L18.5 6.5 F1 M6.5 11.5L12.2492 17.2492L12.2492 17.2492C12.3877 17.3877 12.6123 17.3877 12.7508 17.2492L12.7508 17.2492L18.5 11.5</StreamGeometry>
+    <StreamGeometry x:Key="DownSmallIcon_Path">F1 M9 8L11.8063 10.8063L11.8063 10.8063C11.9133 10.9133 12.0867 10.9133 12.1937 10.8063L12.1937 10.8063L15 8 F1 M9 13L11.8495 15.8495L11.8495 15.8495C11.9326 15.9326 12.0674 15.9326 12.1505 15.8495L12.1505 15.8495L15 13</StreamGeometry>
+    <StreamGeometry x:Key="PauseIcon_Path">F1 M8 9.5C8 9.03406 8 8.80109 8.07612 8.61732C8.17761 8.37229 8.37229 8.17761 8.61732 8.07612C8.80109 8 9.03406 8 9.5 8C9.96594 8 10.1989 8 10.3827 8.07612C10.6277 8.17761 10.8224 8.37229 10.9239 8.61732C11 8.80109 11 9.03406 11 9.5L11 14.5C11 14.9659 11 15.1989 10.9239 15.3827C10.8224 15.6277 10.6277 15.8224 10.3827 15.9239C10.1989 16 9.96594 16 9.5 16C9.03406 16 8.80109 16 8.61732 15.9239C8.37229 15.8224 8.17761 15.6277 8.07612 15.3827C8 15.1989 8 14.9659 8 14.5L8 9.5Z F1 M13 9.5C13 9.03406 13 8.80109 13.0761 8.61732C13.1776 8.37229 13.3723 8.17761 13.6173 8.07612C13.8011 8 14.0341 8 14.5 8C14.9659 8 15.1989 8 15.3827 8.07612C15.6277 8.17761 15.8224 8.37229 15.9239 8.61732C16 8.80109 16 9.03406 16 9.5L16 14.5C16 14.9659 16 15.1989 15.9239 15.3827C15.8224 15.6277 15.6277 15.8224 15.3827 15.9239C15.1989 16 14.9659 16 14.5 16C14.0341 16 13.8011 16 13.6173 15.9239C13.3723 15.8224 13.1776 15.6277 13.0761 15.3827C13 15.1989 13 14.9659 13 14.5L13 9.5Z F1 M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7</StreamGeometry>
+    <StreamGeometry x:Key="UpBigIcon_Path">F1 M18 17.5L12.2907 11.7907L12.2907 11.7907C12.1302 11.6302 11.8698 11.6302 11.7093 11.7907L11.7093 11.7907L6 17.5 F1 M18 12.5L12.2508 6.75078L12.2508 6.75078C12.1123 6.61228 11.8877 6.61228 11.7492 6.75078L11.7492 6.75078L6 12.5</StreamGeometry>
+    <StreamGeometry x:Key="UpSmallIcon_Path">F1 M15 16L12.1937 13.1937L12.1937 13.1937C12.0867 13.0867 11.9133 13.0867 11.8063 13.1937L11.8063 13.1937L9 16 F1 M15 11L12.1505 8.15049L12.1505 8.15049C12.0674 8.06738 11.9326 8.06738 11.8495 8.15049L11.8495 8.15049L9 11</StreamGeometry>
 
 </ResourceDictionary>

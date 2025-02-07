@@ -166,19 +166,29 @@
                                             Spacing="6">
                                     <Button Width="40"
                                             Height="40"
-                                            Background="{DynamicResource Secondary}" />
+                                            Background="{DynamicResource Secondary}"
+                                            Classes="icon-square"
+                                            Tag="{StaticResource DownBigIcon_Path}" />
                                     <Button Width="40"
                                             Height="40"
-                                            Background="{DynamicResource Secondary}" />
+                                            Background="{DynamicResource Secondary}"
+                                            Classes="icon-square"
+                                            Tag="{StaticResource DownSmallIcon_Path}" />
                                     <Button Width="50"
                                             Height="50"
-                                            Background="{DynamicResource Secondary}" />
+                                            Background="{DynamicResource Secondary}"
+                                            Classes="icon-square"
+                                            Tag="{StaticResource PauseIcon_Path}" />
                                     <Button Width="40"
                                             Height="40"
-                                            Background="{DynamicResource Secondary}" />
+                                            Background="{DynamicResource Secondary}"
+                                            Classes="icon-square"
+                                            Tag="{StaticResource UpSmallIcon_Path}" />
                                     <Button Width="40"
                                             Height="40"
-                                            Background="{DynamicResource Secondary}" />
+                                            Background="{DynamicResource Secondary}"
+                                            Classes="icon-square"
+                                            Tag="{StaticResource UpBigIcon_Path}" />
                                 </StackPanel>
 
                                 <!--  Timer load bar  -->
