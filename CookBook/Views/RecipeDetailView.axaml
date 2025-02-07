@@ -134,25 +134,57 @@
         <Border Grid.Row="0"
                 Grid.RowSpan="2"
                 Grid.Column="2">
-            <ItemsControl DockPanel.Dock="Top"
-                          Margin="0,17,0,0"
+            <ItemsControl Margin="0,17,0,0"
+                          DockPanel.Dock="Top"
                           ItemsSource="{Binding Timers}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Height="100"
-                                Width="242"
+                        <Border Width="242"
+                                Height="100"
+                                Margin="0,3,0,0"
                                 Background="{DynamicResource SecondaryBackground}"
-                                CornerRadius="8,0,0,8"
-                                Margin="0,3,0,0">
-                            <Grid RowDefinitions="Auto, *, 10"
-                                  ColumnDefinitions="*">
-                                <DockPanel Width="242">
-                                    <TextBlock Text="{Binding ElapsedText}" 
-                                               DockPanel.Dock="Left"
-                                               Margin="0,0,5,0"/>
-                                    <TextBlock Text="{Binding StartText}"
-                                               DockPanel.Dock="Right"/>
-                                </DockPanel>
+                                CornerRadius="8,0,0,8">
+                            <Grid ColumnDefinitions="*"
+                                  RowDefinitions="Auto, *, 10">
+
+                                <!--  Timer numbers  -->
+                                <Panel Grid.Row="0"
+                                       Margin="4,5,4,0">
+                                    <TextBlock FontSize="20"
+                                               Text="{Binding ElapsedText}" />
+                                    <TextBlock FontSize="20"
+                                               Text="{Binding StartText}"
+                                               TextAlignment="Right" />
+                                </Panel>
+
+                                <!--  Timer control buttons  -->
+                                <StackPanel Grid.Row="1"
+                                            Orientation="Horizontal"
+                                            Spacing="6"
+                                            Margin="4,0,0,0">
+                                    <Button Width="40"
+                                            Height="40"
+                                            Background="{DynamicResource Secondary}" />
+                                    <Button Width="40"
+                                            Height="40"
+                                            Background="{DynamicResource Secondary}" />
+                                    <Button Width="50"
+                                            Height="50"
+                                            Background="{DynamicResource Secondary}" />
+                                    <Button Width="40"
+                                            Height="40"
+                                            Background="{DynamicResource Secondary}" />
+                                    <Button Width="40"
+                                            Height="40"
+                                            Background="{DynamicResource Secondary}" />
+                                </StackPanel>
+
+                                <!--  Timer load bar  -->
+                                <Border Grid.Row="2"
+                                        Width="200"
+                                        HorizontalAlignment="Left"
+                                        Background="{DynamicResource Secondary}"
+                                        CornerRadius="0,8,8,8" />
                             </Grid>
                         </Border>
                     </DataTemplate>
