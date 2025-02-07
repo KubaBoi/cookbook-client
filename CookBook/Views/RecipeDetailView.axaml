@@ -149,19 +149,21 @@
 
                                 <!--  Timer numbers  -->
                                 <Panel Grid.Row="0"
-                                       Margin="4,5,4,0">
+                                       Margin="4,4,4,0">
                                     <TextBlock FontSize="20"
+                                               Foreground="{DynamicResource Primary}"
                                                Text="{Binding ElapsedText}" />
                                     <TextBlock FontSize="20"
+                                               Foreground="{DynamicResource Primary}"
                                                Text="{Binding StartText}"
                                                TextAlignment="Right" />
                                 </Panel>
 
                                 <!--  Timer control buttons  -->
                                 <StackPanel Grid.Row="1"
+                                            Margin="4,0,0,0"
                                             Orientation="Horizontal"
-                                            Spacing="6"
-                                            Margin="4,0,0,0">
+                                            Spacing="6">
                                     <Button Width="40"
                                             Height="40"
                                             Background="{DynamicResource Secondary}" />
