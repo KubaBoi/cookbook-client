@@ -1,28 +1,49 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctrls="clr-namespace:CookBook.Controls">
     <Design.PreviewWith>
         <Border Padding="20">
             <DockPanel>
                 <Button Margin="0,0,0,5"
-                        Classes="icon-square-si"
-                        DockPanel.Dock="Top"
-                        Tag="{StaticResource MinusIcon_Path}" />
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource MinusIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="0"
+                        Classes="icon-square"
+                        DockPanel.Dock="Top" />
 
                 <Button Margin="0,0,0,5"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource PlusIcon_Path}"
                         Classes="icon-square"
-                        DockPanel.Dock="Top"
-                        Tag="{StaticResource PlusIcon_Path}" />
+                        DockPanel.Dock="Top" />
 
                 <Button Margin="0,0,0,5"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource PlusIcon_Path}"
                         Classes="icon-square"
                         DockPanel.Dock="Top"
-                        IsEnabled="false"
-                        Tag="{StaticResource PlusIcon_Path}" />
+                        IsEnabled="false" />
+
+                <Button Width="40"
+                        Height="40"
+                        Margin="0,0,0,5"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource DownSmallIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="4"
+                        Background="{DynamicResource Secondary}"
+                        Classes="icon-square"
+                        DockPanel.Dock="Top" />
+
+                <Button Width="50"
+                        Height="50"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource PauseIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="30"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="2"
+                        ctrls:IconSquareButtonExtensions.PathWidth="30"
+                        Background="{DynamicResource Secondary}"
+                        Classes="icon-square"
+                        DockPanel.Dock="Top" />
             </DockPanel>
         </Border>
     </Design.PreviewWith>
 
-    <Style Selector="Button.icon-square, Button.icon-square-si">
+    <Style Selector="Button.icon-square">
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Background" Value="{DynamicResource Secondary}" />
@@ -32,21 +53,21 @@
                         Height="{TemplateBinding Height}"
                         Background="{TemplateBinding Background}"
                         CornerRadius="8">
-                    <Path Width="20"
-                          Height="20"
+                    <Path Width="{Binding Path=(ctrls:IconSquareButtonExtensions.PathWidth), RelativeSource={RelativeSource TemplatedParent}}"
+                          Height="{Binding Path=(ctrls:IconSquareButtonExtensions.PathHeight), RelativeSource={RelativeSource TemplatedParent}}"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center"
-                          Data="{TemplateBinding Tag}"
+                          Data="{Binding Path=(ctrls:IconSquareButtonExtensions.PathData), RelativeSource={RelativeSource TemplatedParent}}"
                           Stretch="Fill"
                           Stroke="{DynamicResource SecondaryBackground}"
-                          StrokeThickness="4" />
+                          StrokeThickness="{Binding Path=(ctrls:IconSquareButtonExtensions.PathStrokeThickness), RelativeSource={RelativeSource TemplatedParent}}" />
+
+                    <!--<Path StrokeThickness="{Binding Path=(local:IconSquareButtonExtensions.PathStrokeThickness),
+                          RelativeSource={RelativeSource TemplatedParent},
+                          OutputBinding={x:Static Debug.WriteLine}}" />-->
                 </Border>
             </ControlTemplate>
         </Setter>
-
-        <Style Selector="^.icon-square-si Path">
-            <Setter Property="Height" Value="0" />
-        </Style>
 
         <Style Selector="^:pressed">
             <Setter Property="Background" Value="{DynamicResource LightSecondary}" />

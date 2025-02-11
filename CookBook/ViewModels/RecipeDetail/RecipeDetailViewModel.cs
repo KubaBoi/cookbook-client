@@ -58,6 +58,7 @@ public partial class RecipeDetailViewModel : ViewModelBase
         Timers = new List<CookingTimerViewModel>()
         {
             new CookingTimerViewModel(TimeSpan.FromSeconds(5)),
+            new CookingTimerViewModel(TimeSpan.FromSeconds(-5)),
             new CookingTimerViewModel(TimeSpan.FromSeconds(1000)),
             new CookingTimerViewModel(TimeSpan.FromSeconds(150)),
             new CookingTimerViewModel(TimeSpan.FromSeconds(20))

@@ -8,12 +8,15 @@ using System.Text;
 namespace CookBook.ViewModels.RecipeDetail;
 public partial class CookingTimerViewModel : ObservableObject
 {
+    private readonly int ELEMENT_WIDTH = 242;
+
     public CookingTimerViewModel(TimeSpan test)
     {
         _timer = new CookingTimer(test);
         _elapsed = test;
         _start = test.Add(TimeSpan.FromSeconds(10));
 
+        Recalculate();
         _elapsedText = FormatTime(_elapsed);
         _startText = FormatTime(_start);
     }
@@ -36,31 +39,54 @@ public partial class CookingTimerViewModel : ObservableObject
     private bool _isRunning;
 
     [ObservableProperty]
-    private string _elapsedText;
+    private bool _isDone;
 
     [ObservableProperty]
-    private string _startText;
+    private string? _elapsedText;
 
+    [ObservableProperty]
+    private string? _startText;
+
+    [ObservableProperty]
+    private int _width;
+
+    [MemberNotNull(nameof(Elapsed),
+                   nameof(Start),
+                   nameof(Width))]
     public void Update()
     {
         Elapsed = _timer.ElapsedTime;
         Start = _timer.StartTime;
         IsRunning = _timer.IsRunning;
 
+        Recalculate();
+
         ElapsedText = FormatTime(Elapsed);
         StartText = FormatTime(Start);
     }
 
+    private void Recalculate()
+    {
+        IsDone = Elapsed <= TimeSpan.Zero;
+        if (IsDone) Width = ELEMENT_WIDTH;
+        else Width = (int)(Elapsed / Start * ELEMENT_WIDTH);
+    }
+
     private string FormatTime(TimeSpan span)
     {
+        var spanCopy = TimeSpan.FromSeconds(span.TotalSeconds);
+        bool isMinus = spanCopy <= TimeSpan.Zero;
+        if (isMinus) spanCopy *= -1;
+
         return new StringBuilder()
-            .Append(span.Hours > 0 ? span.Hours : "")
-            .Append(span.Hours > 0 ? ':' : "")
-            .Append(span.Minutes <= 9 ? "0" : "")
-            .Append(span.Minutes)
+            .Append(isMinus ? "-" : "")
+            .Append(spanCopy.Hours > 0 ? spanCopy.Hours : "")
+            .Append(spanCopy.Hours > 0 ? ':' : "")
+            .Append(spanCopy.Minutes <= 9 ? "0" : "")
+            .Append(spanCopy.Minutes)
             .Append(':')
-            .Append(span.Seconds <= 9 ? "0" : "")
-            .Append(span.Seconds)
+            .Append(spanCopy.Seconds <= 9 ? "0" : "")
+            .Append(spanCopy.Seconds)
             .ToString();
     }
 }
