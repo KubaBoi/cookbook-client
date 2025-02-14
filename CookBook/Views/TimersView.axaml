@@ -36,8 +36,10 @@
                     DockPanel.Dock="Top" />
 
             <!--  Saved timers  -->
-            <ScrollViewer DockPanel.Dock="Top">
-                <ItemsControl ItemsSource="{Binding SavedTimers}">
+            <ScrollViewer DockPanel.Dock="Top"
+                          FlowDirection="RightToLeft">
+                <ItemsControl ItemsSource="{Binding SavedTimers}"
+                              FlowDirection="LeftToRight">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="rd:CookingTimerViewModel">
                             <Button Width="260"
