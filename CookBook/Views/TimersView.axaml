@@ -36,44 +36,47 @@
                     DockPanel.Dock="Top" />
 
             <!--  Saved timers  -->
-            <ItemsControl DockPanel.Dock="Top"
-                          ItemsSource="{Binding SavedTimers}">
-                <ItemsControl.DataTemplates>
-                    <DataTemplate x:DataType="rd:CookingTimerViewModel">
-                        <Button Width="260"
-                                Height="100"
-                                Margin="0,0,0,3"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                CornerRadius="0,8,8,0">
-                            <TextBlock Margin="10,0,0,0"
-                                       VerticalAlignment="Center"
-                                       FontSize="36"
-                                       FontWeight="SemiBold"
-                                       Text="{Binding StartText}">
-                                <TextBlock.Styles>
-                                    <Style Selector="TextBlock">
-                                        <Setter Property="Foreground" Value="{DynamicResource Primary}" />
-                                    </Style>
-                                    <Style Selector="Button:pressed > TextBlock">
-                                        <Setter Property="Foreground" Value="{DynamicResource MainBackground}" />
-                                    </Style>
-                                </TextBlock.Styles>
-                            </TextBlock>
+            <ScrollViewer DockPanel.Dock="Top">
+                <ItemsControl ItemsSource="{Binding SavedTimers}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="rd:CookingTimerViewModel">
+                            <Button Width="260"
+                                    Height="100"
+                                    Margin="0,0,0,3"
+                                    Padding="0"
+                                    HorizontalAlignment="Left"
+                                    Command="{Binding DataContext.LoadSavedTimerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}"
+                                    CornerRadius="0,8,8,0">
+                                <TextBlock Margin="10,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="36"
+                                           FontWeight="SemiBold"
+                                           Text="{Binding StartText}">
+                                    <TextBlock.Styles>
+                                        <Style Selector="TextBlock">
+                                            <Setter Property="Foreground" Value="{DynamicResource Primary}" />
+                                        </Style>
+                                        <Style Selector="Button:pressed > TextBlock">
+                                            <Setter Property="Foreground" Value="{DynamicResource MainBackground}" />
+                                        </Style>
+                                    </TextBlock.Styles>
+                                </TextBlock>
 
-                            <Button.Styles>
-                                <Style Selector="Button">
-                                    <Setter Property="Background" Value="{DynamicResource SecondaryBackground}" />
-                                </Style>
-                                <Style Selector="Button:pressed /template/ ContentPresenter">
-                                    <Setter Property="Background" Value="{DynamicResource LightSecondary}" />
-                                </Style>
-                            </Button.Styles>
+                                <Button.Styles>
+                                    <Style Selector="Button">
+                                        <Setter Property="Background" Value="{DynamicResource SecondaryBackground}" />
+                                    </Style>
+                                    <Style Selector="Button:pressed /template/ ContentPresenter">
+                                        <Setter Property="Background" Value="{DynamicResource LightSecondary}" />
+                                    </Style>
+                                </Button.Styles>
 
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.DataTemplates>
-            </ItemsControl>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </DockPanel>
 
         <Grid Grid.Column="1"
@@ -278,8 +281,8 @@
                     ctrls:IconSquareButtonExtensions.PathStrokeThickness="5"
                     ctrls:IconSquareButtonExtensions.PathWidth="80"
                     Classes="icon-square"
-                    IsEnabled="{Binding IsStartButtonEnabled}"
-                    Command="{Binding StartTimerCommand}" />
+                    Command="{Binding StartTimerCommand}"
+                    IsEnabled="{Binding IsStartButtonEnabled}" />
 
         </Grid>
 

@@ -33,7 +33,7 @@ public partial class TimersViewModel : ViewModelBase
     #region Properties
 
     [ObservableProperty]
-    private List<CookingTimerViewModel>? _savedTimers;
+    private ObservableCollection<CookingTimerViewModel>? _savedTimers;
 
     [ObservableProperty]
     private string? _hoursText = "00";
@@ -72,6 +72,9 @@ public partial class TimersViewModel : ViewModelBase
     [ObservableProperty]
     private ICommand? _startTimerCommand;
 
+    [ObservableProperty]
+    private ICommand? _loadSavedTimerCommand;
+
     #endregion
 
     #region Command methods
@@ -83,6 +86,7 @@ public partial class TimersViewModel : ViewModelBase
         UpdateMinutesCommand = new RelayCommand<string?>(UpdateMinutes);
         UpdateSecondsCommand = new RelayCommand<string?>(UpdateSeconds);
         StartTimerCommand = new RelayCommand(StartTimer);
+        LoadSavedTimerCommand = new RelayCommand<CookingTimerViewModel?>(LoadSavedTimer);
     }
 
     private void GoBack()
@@ -90,12 +94,13 @@ public partial class TimersViewModel : ViewModelBase
         _navigationService.Navigate(Services.Core.NavigationPath.RecipeDetail);
     }
 
-    private void UpdateHours(string? strVal)
+    private void UpdateHours(string? strVal = null)
     {
-        Debug.Assert(strVal is not null);
-
         // tohle je debilni, ale lepsi nez kvuli tomu vytvaret novy konvertor
-        int value = int.Parse(strVal);
+        int value = 0;
+        if (strVal is not null)
+            value = int.Parse(strVal);
+
         _hours += value;
         if (_hours < 0)
         {
@@ -107,11 +112,12 @@ public partial class TimersViewModel : ViewModelBase
         UpdateStartButtonEnabled();
     }
 
-    private void UpdateMinutes(string? strVal)
+    private void UpdateMinutes(string? strVal = null)
     {
-        Debug.Assert(strVal is not null);
+        int value = 0;
+        if (strVal is not null)
+            value = int.Parse(strVal);
 
-        int value = int.Parse(strVal);
         _minutes += value;
         if (_minutes < 0)
         {
@@ -126,11 +132,12 @@ public partial class TimersViewModel : ViewModelBase
         UpdateStartButtonEnabled();
     }
 
-    private void UpdateSeconds(string? strVal)
+    private void UpdateSeconds(string? strVal = null)
     {
-        Debug.Assert(strVal is not null);
+        int value = 0;
+        if (strVal is not null)
+            value = int.Parse(strVal);
 
-        int value = int.Parse(strVal);
         _seconds += value;
         if (_seconds < 0)
         {
@@ -151,19 +158,35 @@ public partial class TimersViewModel : ViewModelBase
         GoBack();
     }
 
+    private void LoadSavedTimer(CookingTimerViewModel? timer)
+    {
+        Debug.Assert(timer is not null);
+
+        _hours = timer.Start.Hours;
+        _minutes = timer.Start.Minutes;
+        _seconds = timer.Start.Seconds;
+
+        UpdateHours();
+        UpdateMinutes();
+        UpdateSeconds();
+    }
+
     #endregion
 
     #region Private methods
 
     private void InitSavedTimers()
     {
-        SavedTimers = new List<CookingTimerViewModel>()
+        SavedTimers = new ()
         {
             new CookingTimerViewModel(TimeSpan.FromMinutes(1)),
             new CookingTimerViewModel(TimeSpan.FromMinutes(5)),
             new CookingTimerViewModel(TimeSpan.FromMinutes(10)),
             new CookingTimerViewModel(TimeSpan.FromMinutes(15)),
-            new CookingTimerViewModel(TimeSpan.FromHours(1))
+            new CookingTimerViewModel(TimeSpan.FromHours(1)),
+            new CookingTimerViewModel(TimeSpan.FromHours(1.5)),
+            new CookingTimerViewModel(TimeSpan.FromHours(2)),
+            new CookingTimerViewModel(TimeSpan.FromHours(3)),
         };
     }
 
