@@ -59,7 +59,7 @@
                           VerticalAlignment="Center"
                           Data="{Binding Path=(ctrls:IconSquareButtonExtensions.PathData), RelativeSource={RelativeSource TemplatedParent}}"
                           Stretch="Fill"
-                          Stroke="{DynamicResource SecondaryBackground}"
+                          Stroke="{Binding Path=(ctrls:IconSquareButtonExtensions.IconColor), RelativeSource={RelativeSource TemplatedParent}}"
                           StrokeThickness="{Binding Path=(ctrls:IconSquareButtonExtensions.PathStrokeThickness), RelativeSource={RelativeSource TemplatedParent}}" />
 
                     <!--<Path StrokeThickness="{Binding Path=(local:IconSquareButtonExtensions.PathStrokeThickness),

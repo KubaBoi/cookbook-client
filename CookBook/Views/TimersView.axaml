@@ -1,14 +1,288 @@
 <UserControl x:Class="CookBook.Views.TimersView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CookBook.Converters"
+             xmlns:ctrls="clr-namespace:CookBook.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rd="clr-namespace:CookBook.ViewModels.RecipeDetail"
              xmlns:vm="clr-namespace:CookBook.ViewModels.Timers"
              d:DesignHeight="600"
              d:DesignWidth="1024"
              x:DataType="vm:TimersViewModel"
              mc:Ignorable="d">
-    
-    <TextBlock Text="{Binding Title}" />
-    
+
+    <Grid Background="{DynamicResource MainBackground}"
+          ColumnDefinitions="260, *">
+
+        <!--  Saved timers  -->
+        <DockPanel Grid.Column="0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   LastChildFill="False">
+
+            <!--  Back button  -->
+            <Button Width="240"
+                    Height="70"
+                    Margin="10,10,0,10"
+                    ctrls:IconSquareButtonExtensions.IconColor="{DynamicResource MainBackground}"
+                    ctrls:IconSquareButtonExtensions.PathData="{StaticResource BackIcon_Path}"
+                    ctrls:IconSquareButtonExtensions.PathHeight="50"
+                    ctrls:IconSquareButtonExtensions.PathStrokeThickness="5"
+                    ctrls:IconSquareButtonExtensions.PathWidth="50"
+                    Background="{DynamicResource Attention}"
+                    Classes="icon-square"
+                    Command="{Binding GoBackCommand}"
+                    DockPanel.Dock="Top" />
+
+            <!--  Saved timers  -->
+            <ItemsControl DockPanel.Dock="Top"
+                          ItemsSource="{Binding SavedTimers}">
+                <ItemsControl.DataTemplates>
+                    <DataTemplate x:DataType="rd:CookingTimerViewModel">
+                        <Button Width="260"
+                                Height="100"
+                                Margin="0,0,0,3"
+                                Padding="0"
+                                HorizontalAlignment="Left"
+                                CornerRadius="0,8,8,0">
+                            <TextBlock Margin="10,0,0,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="36"
+                                       FontWeight="SemiBold"
+                                       Text="{Binding StartText}">
+                                <TextBlock.Styles>
+                                    <Style Selector="TextBlock">
+                                        <Setter Property="Foreground" Value="{DynamicResource Primary}" />
+                                    </Style>
+                                    <Style Selector="Button:pressed > TextBlock">
+                                        <Setter Property="Foreground" Value="{DynamicResource MainBackground}" />
+                                    </Style>
+                                </TextBlock.Styles>
+                            </TextBlock>
+
+                            <Button.Styles>
+                                <Style Selector="Button">
+                                    <Setter Property="Background" Value="{DynamicResource SecondaryBackground}" />
+                                </Style>
+                                <Style Selector="Button:pressed /template/ ContentPresenter">
+                                    <Setter Property="Background" Value="{DynamicResource LightSecondary}" />
+                                </Style>
+                            </Button.Styles>
+
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </DockPanel>
+
+        <Grid Grid.Column="1"
+              Margin="0,48,0,0"
+              ColumnDefinitions="36, 172, 88, 172, 88, 172, 36"
+              RowDefinitions="400, *">
+
+            <!--  Hours  -->
+            <StackPanel Grid.Row="0"
+                        Grid.Column="1"
+                        Spacing="7">
+
+                <!--  Hour Big Up  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource UpIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="20"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
+                        ctrls:IconSquareButtonExtensions.PathWidth="20"
+                        Classes="icon-square"
+                        Command="{Binding UpdateHoursCommand}"
+                        CommandParameter="10" />
+
+                <!--  Hour Small Up  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource UpIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="10"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="2"
+                        ctrls:IconSquareButtonExtensions.PathWidth="10"
+                        Classes="icon-square"
+                        Command="{Binding UpdateHoursCommand}"
+                        CommandParameter="1" />
+
+                <!--  Hour number  -->
+                <TextBlock Width="124"
+                           Height="116"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="96"
+                           FontWeight="Medium"
+                           Foreground="{DynamicResource Primary}"
+                           Text="{Binding HoursText}" />
+
+                <!--  Hour Small Down  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource DownIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="10"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="2"
+                        ctrls:IconSquareButtonExtensions.PathWidth="10"
+                        Classes="icon-square"
+                        Command="{Binding UpdateHoursCommand}"
+                        CommandParameter="-1"
+                        IsEnabled="{Binding IsHoursDecEnabled}" />
+
+                <!--  Hour Big Down  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource DownIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="20"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
+                        ctrls:IconSquareButtonExtensions.PathWidth="20"
+                        Classes="icon-square"
+                        Command="{Binding UpdateHoursCommand}"
+                        CommandParameter="-10"
+                        IsEnabled="{Binding IsHoursDecEnabled}" />
+
+            </StackPanel>
+
+            <!--  Minutes  -->
+            <StackPanel Grid.Row="0"
+                        Grid.Column="3"
+                        Spacing="7">
+
+                <!--  Minutes Big Up  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource UpIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="20"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
+                        ctrls:IconSquareButtonExtensions.PathWidth="20"
+                        Classes="icon-square"
+                        Command="{Binding UpdateMinutesCommand}"
+                        CommandParameter="10" />
+
+                <!--  Minutes Small Up  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource UpIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="10"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="2"
+                        ctrls:IconSquareButtonExtensions.PathWidth="10"
+                        Classes="icon-square"
+                        Command="{Binding UpdateMinutesCommand}"
+                        CommandParameter="1" />
+
+                <!--  Minutes number  -->
+                <TextBlock Width="124"
+                           Height="116"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="96"
+                           FontWeight="Medium"
+                           Foreground="{DynamicResource Primary}"
+                           Text="{Binding MinutesText}" />
+
+                <!--  Minutes Small Down  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource DownIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="10"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="2"
+                        ctrls:IconSquareButtonExtensions.PathWidth="10"
+                        Classes="icon-square"
+                        Command="{Binding UpdateMinutesCommand}"
+                        CommandParameter="-1" />
+
+                <!--  Minutes Big Down  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource DownIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="20"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
+                        ctrls:IconSquareButtonExtensions.PathWidth="20"
+                        Classes="icon-square"
+                        Command="{Binding UpdateMinutesCommand}"
+                        CommandParameter="-10" />
+
+            </StackPanel>
+
+            <!--  Seconds  -->
+            <StackPanel Grid.Row="0"
+                        Grid.Column="5"
+                        Spacing="7">
+
+                <!--  Seconds Big Up  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource UpIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="20"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
+                        ctrls:IconSquareButtonExtensions.PathWidth="20"
+                        Classes="icon-square"
+                        Command="{Binding UpdateSecondsCommand}"
+                        CommandParameter="10" />
+
+                <!--  Seconds Small Up  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource UpIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="10"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="2"
+                        ctrls:IconSquareButtonExtensions.PathWidth="10"
+                        Classes="icon-square"
+                        Command="{Binding UpdateSecondsCommand}"
+                        CommandParameter="1" />
+
+                <!--  Seconds number  -->
+                <TextBlock Width="124"
+                           Height="116"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="96"
+                           FontWeight="Medium"
+                           Foreground="{DynamicResource Primary}"
+                           Text="{Binding SecondsText}" />
+
+                <!--  Seconds Small Down  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource DownIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="10"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="2"
+                        ctrls:IconSquareButtonExtensions.PathWidth="10"
+                        Classes="icon-square"
+                        Command="{Binding UpdateSecondsCommand}"
+                        CommandParameter="-1" />
+
+                <!--  Seconds Big Down  -->
+                <Button Width="172"
+                        Height="65"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource DownIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="20"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
+                        ctrls:IconSquareButtonExtensions.PathWidth="20"
+                        Classes="icon-square"
+                        Command="{Binding UpdateSecondsCommand}"
+                        CommandParameter="-10" />
+
+            </StackPanel>
+
+            <!--  Start button  -->
+            <Button Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="5"
+                    Width="692"
+                    Height="110"
+                    Margin="0,20,0,0"
+                    ctrls:IconSquareButtonExtensions.PathData="{StaticResource TimerStartIcon_Path}"
+                    ctrls:IconSquareButtonExtensions.PathHeight="80"
+                    ctrls:IconSquareButtonExtensions.PathStrokeThickness="5"
+                    ctrls:IconSquareButtonExtensions.PathWidth="80"
+                    Classes="icon-square"
+                    IsEnabled="{Binding IsStartButtonEnabled}"
+                    Command="{Binding StartTimerCommand}" />
+
+        </Grid>
+
+    </Grid>
+
 </UserControl>

@@ -1,19 +1,24 @@
 ﻿using CookBook.Services.Abstractions;
 using CookBook.ViewModels;
+using System;
+using System.Collections.Generic;
 
 namespace CookBook.Services.Core;
 public class NavigationService : INavigationService
 {
-    private readonly MainViewModel _mainViewModel;
+    Action<NavigationPath>? _handler;
 
-    public NavigationService(MainViewModel mainViewModel)
+    public void SetNavigationChangeHandler(Action<NavigationPath>? handler)
     {
-        _mainViewModel = mainViewModel;
+        _handler = handler;
     }
 
     public void Navigate(NavigationPath path)
     {
-
+        if (_handler is not null)
+        {
+            _handler(path);
+        }
     }
 }
 

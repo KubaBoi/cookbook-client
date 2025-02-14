@@ -57,11 +57,11 @@ public partial class RecipeDetailViewModel : ViewModelBase
 
         Timers = new List<CookingTimerViewModel>()
         {
-            new CookingTimerViewModel(TimeSpan.FromSeconds(5)),
-            new CookingTimerViewModel(TimeSpan.FromSeconds(-5)),
-            new CookingTimerViewModel(TimeSpan.FromSeconds(1000)),
-            new CookingTimerViewModel(TimeSpan.FromSeconds(150)),
-            new CookingTimerViewModel(TimeSpan.FromSeconds(20))
+            new CookingTimerViewModel(TimeSpan.FromSeconds(5), true),
+            new CookingTimerViewModel(TimeSpan.FromSeconds(-5), true),
+            new CookingTimerViewModel(TimeSpan.FromSeconds(1000), true),
+            new CookingTimerViewModel(TimeSpan.FromSeconds(150), true),
+            new CookingTimerViewModel(TimeSpan.FromSeconds(20), true)
         };
     }
 
@@ -103,31 +103,28 @@ public partial class RecipeDetailViewModel : ViewModelBase
     private bool _isMinusPortionButtonEnabled = true;
 
     [ObservableProperty]
-    private List<IngredientViewModel> _ingredients;
+    private List<IngredientViewModel>? _ingredients;
 
     [ObservableProperty]
-    private List<string> _steps;
+    private List<string>? _steps;
 
     [ObservableProperty]
-    private List<CookingTimerViewModel> _timers;
+    private List<CookingTimerViewModel>? _timers;
 
     #endregion
 
     #region Commands
 
     [ObservableProperty]
-    public ICommand _minusPortionCommand;
+    public ICommand? _minusPortionCommand;
 
     [ObservableProperty]
-    public ICommand _plusPortionCommand;
+    public ICommand? _plusPortionCommand;
 
     #endregion
 
     #region Command methods
 
-    [MemberNotNull(
-        nameof(MinusPortionCommand),
-        nameof(PlusPortionCommand))]
     private void InitCommands()
     {
         MinusPortionCommand = new RelayCommand(MinusPortion);

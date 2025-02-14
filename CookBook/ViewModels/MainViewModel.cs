@@ -1,13 +1,15 @@
 ﻿using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CookBook.Services.Abstractions;
 using CookBook.Services.Core;
-using CookBook.ViewModels.Timers;
 using CookBook.Views;
 
 namespace CookBook.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
+    private readonly INavigationService _navigationService;
+
     private readonly RecipeDetailView _recipeDetailView;
     private readonly TimersView _timersView;
 
@@ -19,14 +21,18 @@ public partial class MainViewModel : ViewModelBase
     }
 
     public MainViewModel(
+        INavigationService navigationService,
         RecipeDetailView recipeDetailView,
         TimersView timersView)
     {
+        _navigationService = navigationService;
         _recipeDetailView = recipeDetailView;
         _timersView = timersView;
 
-        //ChangeView(NavigationPath.Timers);
-        ChangeView();
+        _navigationService.SetNavigationChangeHandler(ChangeView);
+
+        ChangeView(NavigationPath.Timers);
+        //ChangeView();
     }
 
     [ObservableProperty]

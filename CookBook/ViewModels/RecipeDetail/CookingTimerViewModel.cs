@@ -10,11 +10,11 @@ public partial class CookingTimerViewModel : ObservableObject
 {
     private readonly int ELEMENT_WIDTH = 242;
 
-    public CookingTimerViewModel(TimeSpan test)
+    public CookingTimerViewModel(TimeSpan stat, bool isTesting = false)
     {
-        _timer = new CookingTimer(test);
-        _elapsed = test;
-        _start = test.Add(TimeSpan.FromSeconds(10));
+        _timer = new CookingTimer(stat);
+        _elapsed = stat;
+        _start = stat.Add(TimeSpan.FromSeconds(isTesting ? 10 : 0));
 
         Recalculate();
         _elapsedText = FormatTime(_elapsed);

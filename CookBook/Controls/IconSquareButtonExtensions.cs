@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Media.Immutable;
 
 namespace CookBook.Controls;
 public static class IconSquareButtonExtensions
@@ -36,4 +37,12 @@ public static class IconSquareButtonExtensions
                                                           4);
     public static void SetPathStrokeThickness(AvaloniaObject element, double value) => element.SetValue(PathStrokeThicknessProperty, value);
     public static double GetPathStrokeThickness(AvaloniaObject element) => element.GetValue(PathStrokeThicknessProperty);
+
+    // IconColor
+    public static readonly AttachedProperty<ImmutableSolidColorBrush> IconColorProperty =
+        AvaloniaProperty.RegisterAttached<Button, ImmutableSolidColorBrush>("IconColor",
+                                                                   typeof(IconSquareButtonExtensions), //FF3f4e4f
+                                                                   new ImmutableSolidColorBrush(new Color(255, 63, 78, 79)));
+    public static void SetIconColor(AvaloniaObject element, ImmutableSolidColorBrush value) => element.SetValue(IconColorProperty, value);
+    public static ImmutableSolidColorBrush GetIconColor(AvaloniaObject element) => element.GetValue(IconColorProperty);
 }
