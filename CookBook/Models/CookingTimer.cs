@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CookBook.Models;
 public class CookingTimer
 {
-    public TimeSpan StartTime {  get; }
+    public TimeSpan StartTime { get; }
     public TimeSpan ElapsedTime { get; private set; }
 
     public bool IsRunning { get; set; }
@@ -25,9 +25,19 @@ public class CookingTimer
         if (IsRunning) ElapsedTime -= TimeSpan.FromSeconds(1);
     }
 
+    public void Add(TimeSpan time)
+    {
+        ElapsedTime += time;
+    }
+
+    public void Sub(TimeSpan time)
+    {
+        ElapsedTime -= time;
+    }
+
     public void Start()
-    { 
-        IsRunning = true; 
+    {
+        IsRunning = true;
     }
 
     public void Pause()

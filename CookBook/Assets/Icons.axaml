@@ -3,104 +3,130 @@
 
     <Design.PreviewWith>
         <Border>
-            <DockPanel>
-                <Path Width="30"
-                      Height="30"
-                      Data="{StaticResource MinusIcon_Path}"
-                      DockPanel.Dock="Top"
-                      Stroke="Red"
-                      StrokeThickness="1" />
-                <TextBlock DockPanel.Dock="Top"
-                           Text="MinusIcon_Path" />
+            <StackPanel Orientation="Horizontal">
+                <DockPanel>
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource MinusIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="MinusIcon_Path" />
 
-                <Path Width="30"
-                      Height="30"
-                      Data="{StaticResource PlusIcon_Path}"
-                      DockPanel.Dock="Top"
-                      Stroke="Red"
-                      StrokeThickness="1" />
-                <TextBlock DockPanel.Dock="Top"
-                           Text="PlusIcon_Path" />
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource PlusIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="PlusIcon_Path" />
 
-                <!--  Timer control icons  -->
-                <Path Width="30"
-                      Height="30"
-                      Data="{StaticResource DownIcon_Path}"
-                      DockPanel.Dock="Top"
-                      Stroke="Red"
-                      StrokeThickness="1" />
-                <TextBlock DockPanel.Dock="Top"
-                           Text="DownBigIcon_Path" />
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource CrossIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="CrossIcon_Path" />
 
-                <Path Width="30"
-                      Height="30"
-                      Data="{StaticResource DownSmallIcon_Path}"
-                      DockPanel.Dock="Top"
-                      Stroke="Red"
-                      StrokeThickness="1" />
-                <TextBlock DockPanel.Dock="Top"
-                           Text="DownSmallIcon_Path" />
+                    <!--  Timer control icons  -->
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource DownIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="DownBigIcon_Path" />
 
-                <Path Width="30"
-                      Height="30"
-                      Data="{StaticResource PauseIcon_Path}"
-                      DockPanel.Dock="Top"
-                      Stroke="Red"
-                      StrokeThickness="1" />
-                <TextBlock DockPanel.Dock="Top"
-                           Text="PauseIcon_Path" />
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource DownSmallIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="DownSmallIcon_Path" />
 
-                <Path Width="30"
-                      Height="30"
-                      Data="{StaticResource UpIcon_Path}"
-                      DockPanel.Dock="Top"
-                      Stroke="Red"
-                      StrokeThickness="1" />
-                <TextBlock DockPanel.Dock="Top"
-                           Text="UpBigIcon_Path" />
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource PauseIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="PauseIcon_Path" />
 
-                <Path Width="30"
-                      Height="30"
-                      Data="{StaticResource UpSmallIcon_Path}"
-                      DockPanel.Dock="Top"
-                      Stroke="Red"
-                      StrokeThickness="1" />
-                <TextBlock DockPanel.Dock="Top"
-                           Text="UpSmallIcon_Path" />
+                </DockPanel>
+                <DockPanel>
 
-                <Path Width="30"
-                      Height="30"
-                      Data="{StaticResource BackIcon_Path}"
-                      DockPanel.Dock="Top"
-                      Stroke="Red"
-                      StrokeThickness="1" />
-                <TextBlock DockPanel.Dock="Top"
-                           Text="BackIcon_Path" />
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource UpIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="UpBigIcon_Path" />
 
-                <Path Width="30"
-                      Height="30"
-                      Data="{StaticResource TimerStartIcon_Path}"
-                      DockPanel.Dock="Top"
-                      Stroke="Red"
-                      StrokeThickness="1" />
-                <TextBlock DockPanel.Dock="Top"
-                           Text="TimerStartIcon_Path" />
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource UpSmallIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="UpSmallIcon_Path" />
 
-                <Path Width="30"
-                      Height="30"
-                      Data="{StaticResource CrossIcon_Path}"
-                      DockPanel.Dock="Top"
-                      Stroke="Red"
-                      StrokeThickness="1" />
-                <TextBlock DockPanel.Dock="Top"
-                           Text="CrossIcon_Path" />
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource BackIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="BackIcon_Path" />
 
-            </DockPanel>
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource TimerStartIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="TimerStartIcon_Path" />
+
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource TimerAddIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="TimerAddIcon_Path" />
+
+                    <Path Width="30"
+                          Height="30"
+                          Data="{StaticResource BookIcon_Path}"
+                          DockPanel.Dock="Top"
+                          Stroke="Red"
+                          StrokeThickness="1" />
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="BookIcon_Path" />
+                </DockPanel>
+                <DockPanel>
+                    
+                </DockPanel>
+            </StackPanel>
         </Border>
     </Design.PreviewWith>
 
     <StreamGeometry x:Key="MinusIcon_Path">F1 M6.25 15L23.75 15</StreamGeometry>
     <StreamGeometry x:Key="PlusIcon_Path">F1 M5 12L19 12 F1 M12 5L12 19</StreamGeometry>
+    <StreamGeometry x:Key="CrossIcon_Path">F1 M7 7L17 17 F1 M17 7L7 17</StreamGeometry>
 
     <!--  Timer control icons  -->
     <StreamGeometry x:Key="DownIcon_Path">F1 M6.5 6.5L12.2093 12.2093L12.2093 12.2093C12.3698 12.3698 12.6302 12.3698 12.7907 12.2093L12.7907 12.2093L18.5 6.5 F1 M6.5 11.5L12.2492 17.2492L12.2492 17.2492C12.3877 17.3877 12.6123 17.3877 12.7508 17.2492L12.7508 17.2492L18.5 11.5</StreamGeometry>
@@ -111,6 +137,7 @@
 
     <StreamGeometry x:Key="BackIcon_Path">F1 M4 7L15 7C17.7614 7 20 9.23857 20 12C20 14.7614 17.7614 17 15 17M4 7L7 4M4 7L7 10M8.00001 17L11 17</StreamGeometry>
     <StreamGeometry x:Key="TimerStartIcon_Path">F1 M13.8876 10.9348C14.9625 11.8117 15.5 12.2501 15.5 13C15.5 13.7499 14.9625 14.1883 13.8876 15.0652C13.5909 15.3073 13.2966 15.5352 13.0261 15.7251C12.7888 15.8917 12.5201 16.064 12.2419 16.2332C11.1695 16.8853 10.6333 17.2114 10.1524 16.8504C9.6715 16.4894 9.62779 15.7336 9.54038 14.2222C9.51566 13.7947 9.5 13.3757 9.5 13C9.5 12.6243 9.51566 12.2053 9.54038 11.7778C9.62779 10.2664 9.6715 9.51061 10.1524 9.1496C10.6333 8.78859 11.1695 9.11466 12.2419 9.76679C12.5201 9.93597 12.7888 10.1083 13.0261 10.2749C13.2966 10.4648 13.5909 10.6927 13.8876 10.9348Z F1 M3.5 4.5L7.50002 2 F1 M20.5 4.5L16.5 2 F1 M7.5 5.20404C8.82378 4.43827 10.3607 4 12 4C16.9706 4 21 8.02944 21 13C21 17.9706 16.9706 22 12 22C7.02944 22 3 17.9706 3 13C3 11.3607 3.43827 9.82378 4.20404 8.5</StreamGeometry>
-    <StreamGeometry x:Key="CrossIcon_Path">F1 M7 7L17 17 F1 M17 7L7 17</StreamGeometry>
-    
+    <StreamGeometry x:Key="TimerAddIcon_Path">F1 M15 13L12 13M12 13L9 13M12 13L12 10M12 13L12 16 F1 M3.5 4.5L7.50002 2 F1 M20.5 4.5L16.5 2 F1 M7.5 5.20404C8.82378 4.43827 10.3607 4 12 4C16.9706 4 21 8.02944 21 13C21 17.9706 16.9706 22 12 22C7.02944 22 3 17.9706 3 13C3 11.3607 3.43827 9.82378 4.20404 8.5</StreamGeometry>
+    <StreamGeometry x:Key="BookIcon_Path">F1 M19.8978 16L7.89778 16C6.96781 16 6.50282 16 6.12132 16.1022C5.08604 16.3796 4.2774 17.1883 4 18.2235 F1 M8 7L16 7 F1 M8 10.5L13 10.5 F1 M13 16L13 19.5309C13 19.8065 13 19.9443 12.9051 20C12.8103 20.0557 12.6806 19.9941 12.4211 19.8708L11.1789 19.2808C11.0911 19.2391 11.0472 19.2182 11 19.2182C10.9528 19.2182 10.9089 19.2391 10.8211 19.2808L9.57889 19.8708C9.31943 19.9941 9.18971 20.0557 9.09485 20C9 19.9443 9 19.8065 9 19.5309L9 16.45 F1 M10 22C7.17157 22 5.75736 22 4.87868 21.1213C4 20.2426 4 18.8284 4 16L4 8C4 5.17157 4 3.75736 4.87868 2.87868C5.75736 2 7.17157 2 10 2L14 2C16.8284 2 18.2426 2 19.1213 2.87868C20 3.75736 20 5.17157 20 8M14 22C16.8284 22 18.2426 22 19.1213 21.1213C20 20.2426 20 18.8284 20 16L20 12</StreamGeometry>
+
 </ResourceDictionary>

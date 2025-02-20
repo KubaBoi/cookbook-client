@@ -3,9 +3,9 @@
 namespace CookBook.Models.Settings;
 
 /// <summary>
-/// Class representing timer saved in json config.
+/// Record representing timer saved in json config.
 /// </summary>
-public class SavedTimer
+public record SavedTimer
 {
     public int Hours { get; set; }
 

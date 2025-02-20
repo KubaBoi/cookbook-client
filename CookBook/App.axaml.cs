@@ -53,7 +53,10 @@ public partial class App : Application
 
     private void AddSettings(IServiceCollection services)
     {
-        using var stream = new FileInfo("appsettings.json").OpenText();
+        var appsettings = new FileInfo(Constants.APP_SETTING_PATH);
+        if (appsettings.Exists is false) return;
+
+        using var stream = appsettings.OpenText();
         var data = stream.ReadToEnd();
         var settings = JsonSerializer.Deserialize<Settings>(data);
         if (settings is not null)
@@ -67,6 +70,7 @@ public partial class App : Application
         services.AddSingleton<IRecipeService, RecipeService>();
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<ITimerService, TimerService>();
+        services.AddSingleton<ISettingsService, SettingsService>();
 
         //services.AddView<MainView, MainViewModel>(ServiceLifetime.Singleton);
         services.AddView<RecipeDetailView, RecipeDetailViewModel>();

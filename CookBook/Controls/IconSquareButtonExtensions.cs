@@ -7,7 +7,7 @@ namespace CookBook.Controls;
 public static class IconSquareButtonExtensions
 {
     // Path
-    public static readonly AttachedProperty<Geometry> PathDataProperty = 
+    public static readonly AttachedProperty<Geometry> PathDataProperty =
         AvaloniaProperty.RegisterAttached<Button, Geometry>("PathData",
                                                             typeof(IconSquareButtonExtensions));
     public static void SetPathData(AvaloniaObject element, Geometry value) => element.SetValue(PathDataProperty, value);
@@ -31,7 +31,7 @@ public static class IconSquareButtonExtensions
     public static double GetPathHeight(AvaloniaObject element) => element.GetValue(PathHeightProperty);
 
     // StrokeThichness
-    public static readonly AttachedProperty<double> PathStrokeThicknessProperty = 
+    public static readonly AttachedProperty<double> PathStrokeThicknessProperty =
         AvaloniaProperty.RegisterAttached<Button, double>("PathStrokeThickness",
                                                           typeof(IconSquareButtonExtensions),
                                                           4);

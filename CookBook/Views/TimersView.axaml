@@ -21,25 +21,41 @@
                    VerticalAlignment="Top"
                    LastChildFill="False">
 
-            <!--  Back button  -->
-            <Button Width="240"
-                    Height="70"
-                    Margin="10,10,0,10"
-                    ctrls:IconSquareButtonExtensions.IconColor="{DynamicResource MainBackground}"
-                    ctrls:IconSquareButtonExtensions.PathData="{StaticResource BackIcon_Path}"
-                    ctrls:IconSquareButtonExtensions.PathHeight="50"
-                    ctrls:IconSquareButtonExtensions.PathStrokeThickness="5"
-                    ctrls:IconSquareButtonExtensions.PathWidth="50"
-                    Background="{DynamicResource Attention}"
-                    Classes="icon-square"
-                    Command="{Binding GoBackCommand}"
-                    DockPanel.Dock="Top" />
+            <StackPanel DockPanel.Dock="Top"
+                        Orientation="Horizontal">
+                <!--  Back button 240  -->
+                <Button Width="115"
+                        Height="70"
+                        Margin="10,10,0,10"
+                        ctrls:IconSquareButtonExtensions.IconColor="{DynamicResource MainBackground}"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource BackIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="40"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="5"
+                        ctrls:IconSquareButtonExtensions.PathWidth="50"
+                        Background="{DynamicResource Attention}"
+                        Classes="icon-square"
+                        Command="{Binding GoBackCommand}"
+                        DockPanel.Dock="Top" />
+                <!--  Save timer button  -->
+                <Button Width="115"
+                        Height="70"
+                        Margin="10,10,0,10"
+                        ctrls:IconSquareButtonExtensions.IconColor="{DynamicResource MainBackground}"
+                        ctrls:IconSquareButtonExtensions.PathData="{StaticResource PlusIcon_Path}"
+                        ctrls:IconSquareButtonExtensions.PathHeight="40"
+                        ctrls:IconSquareButtonExtensions.PathStrokeThickness="5"
+                        ctrls:IconSquareButtonExtensions.PathWidth="40"
+                        Classes="icon-square"
+                        Command="{Binding SaveTimerCommand}"
+                        DockPanel.Dock="Top"
+                        IsEnabled="{Binding IsStartButtonEnabled}" />
+            </StackPanel>
 
             <!--  Saved timers  -->
             <ScrollViewer DockPanel.Dock="Top"
                           FlowDirection="RightToLeft">
-                <ItemsControl ItemsSource="{Binding SavedTimers}"
-                              FlowDirection="LeftToRight">
+                <ItemsControl FlowDirection="LeftToRight"
+                              ItemsSource="{Binding SavedTimers}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="rd:CookingTimerViewModel">
                             <Button Width="260"

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CookBook.Models.Settings;
 using CookBook.Services.Abstractions;
 using CookBook.ViewModels.RecipeDetail;
 using System;
@@ -13,22 +14,30 @@ public partial class TimersViewModel : ViewModelBase
     private readonly ITimerService _timeService;
     private readonly INavigationService _navigationService;
     private readonly ISettings _settings;
+    private readonly ISettingsService _settingsService;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public TimersViewModel()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     {
-        InitSavedTimers();
+        SavedTimers = new ObservableCollection<CookingTimerViewModel>
+        {
+            new CookingTimerViewModel(TimeSpan.FromSeconds(1)),
+            new CookingTimerViewModel(TimeSpan.FromSeconds(500)),
+            new CookingTimerViewModel(TimeSpan.FromSeconds(60)),
+        };
     }
 
     public TimersViewModel(
         ITimerService timerService,
         INavigationService navigationService,
-        ISettings settings)
+        ISettings settings,
+        ISettingsService settingsService)
     {
         _timeService = timerService;
         _navigationService = navigationService;
         _settings = settings;
+        _settingsService = settingsService;
 
         InitSavedTimers();
         InitCommands();
@@ -62,7 +71,10 @@ public partial class TimersViewModel : ViewModelBase
     #region Commands
 
     [ObservableProperty]
-    private ICommand? _GoBackCommand;
+    private ICommand? _goBackCommand;
+
+    [ObservableProperty]
+    private ICommand? _saveTimerCommand;
 
     [ObservableProperty]
     private ICommand? _updateHoursCommand;
@@ -86,6 +98,7 @@ public partial class TimersViewModel : ViewModelBase
     private void InitCommands()
     {
         GoBackCommand = new RelayCommand(GoBack);
+        SaveTimerCommand = new RelayCommand(SaveTimer);
         UpdateHoursCommand = new RelayCommand<string?>(UpdateHours);
         UpdateMinutesCommand = new RelayCommand<string?>(UpdateMinutes);
         UpdateSecondsCommand = new RelayCommand<string?>(UpdateSeconds);
@@ -96,6 +109,22 @@ public partial class TimersViewModel : ViewModelBase
     private void GoBack()
     {
         _navigationService.Navigate(Services.Core.NavigationPath.RecipeDetail);
+    }
+
+    private void SaveTimer()
+    {
+        var newTimer = new SavedTimer()
+        {
+            Hours = _hours,
+            Minutes = _minutes,
+            Seconds = _seconds
+        };
+        if (!_settings.SavedTimers.Contains(newTimer))
+        {
+            _settings.SavedTimers.Add(newTimer);
+            _settingsService.SaveSettings();
+            InitSavedTimers();
+        }
     }
 
     private void UpdateHours(string? strVal = null)

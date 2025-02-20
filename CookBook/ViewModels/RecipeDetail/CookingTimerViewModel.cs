@@ -27,7 +27,7 @@ public partial class CookingTimerViewModel : ObservableObject
         Update();
     }
 
-    private CookingTimer _timer;
+    public CookingTimer _timer;
 
     [ObservableProperty]
     private TimeSpan _elapsed;
@@ -65,9 +65,23 @@ public partial class CookingTimerViewModel : ObservableObject
         StartText = FormatTime(Start);
     }
 
+    public void Add(TimeSpan diff)
+    {
+        _timer.Add(diff);
+        Update();
+    }
+
+    public void Sub(TimeSpan diff)
+    {
+        _timer.Sub(diff);
+        Update();
+    }
+
     public void Pause()
     {
-        IsRunning = !IsRunning;
+        if (IsRunning) _timer.Pause();
+        else _timer.Start();
+        Update();
     }
 
     private void Recalculate()
