@@ -12,6 +12,7 @@ public partial class MainViewModel : ViewModelBase
 
     private readonly RecipeDetailView _recipeDetailView;
     private readonly TimersView _timersView;
+    private readonly RecipesView _recipesView;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public MainViewModel()
@@ -23,16 +24,19 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel(
         INavigationService navigationService,
         RecipeDetailView recipeDetailView,
-        TimersView timersView)
+        TimersView timersView,
+        RecipesView recipesView)
     {
         _navigationService = navigationService;
         _recipeDetailView = recipeDetailView;
         _timersView = timersView;
+        _recipesView = recipesView;
 
         _navigationService.SetNavigationChangeHandler(ChangeView);
 
         //ChangeView(NavigationPath.Timers);
-        ChangeView();
+        ChangeView(NavigationPath.RecipeSelection);
+        //ChangeView();
     }
 
     [ObservableProperty]
@@ -47,6 +51,9 @@ public partial class MainViewModel : ViewModelBase
                 break;
             case NavigationPath.Timers:
                 CurrentView = _timersView;
+                break;
+            case NavigationPath.RecipeSelection:
+                CurrentView = _recipesView;
                 break;
         }
     }
