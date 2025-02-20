@@ -71,6 +71,7 @@
 
                 <!--  List of ingredients  -->
                 <ItemsControl Padding="10,0"
+                              x:DataType="vm:IngredientViewModel"
                               Grid.IsSharedSizeScope="True"
                               ItemsSource="{Binding Ingredients}">
                     <ItemsControl.ItemTemplate>
@@ -132,7 +133,8 @@
                 Padding="20">
             <ScrollViewer>
                 <DockPanel>
-                    <ItemsControl DockPanel.Dock="Top"
+                    <ItemsControl x:DataType="vm:StepViewModel"
+                                  DockPanel.Dock="Top"
                                   ItemsSource="{Binding Steps}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -176,7 +178,8 @@
                 Grid.Column="2">
             <ScrollViewer Margin="0,17,0,0">
                 <DockPanel>
-                    <ItemsControl DockPanel.Dock="Top"
+                    <ItemsControl x:DataType="vm:CookingTimerViewModel"
+                                  DockPanel.Dock="Top"
                                   ItemsSource="{Binding Timers}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>

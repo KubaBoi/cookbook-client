@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CookBook.Models;
 using CookBook.Services.Abstractions;
+using CookBook.Services.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -242,12 +243,12 @@ public partial class RecipeDetailViewModel : ViewModelBase
 
     private void GoToTimersView()
     {
-        _navigationService.Navigate(Services.Core.NavigationPath.Timers);
+        _navigationService.Navigate(NavigationPath.Timers);
     }
 
     private void GoToRecipesView()
     {
-
+        _navigationService.Navigate(NavigationPath.RecipeSelection);
     }
 
     #endregion

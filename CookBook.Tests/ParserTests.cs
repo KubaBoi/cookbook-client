@@ -31,5 +31,13 @@ public class ParserTests
         Assert.Equal("200", recipe.Ingredients[1].AmountText);
         Assert.Equal("g", recipe.Ingredients[1].Unit);
     }
+
+    [Fact]
+    public void Test()
+    {
+        string json = "{\"id\":\"ec6205f6-59f7-4eac-bbc4-244de03f3538\",\"name\":\"Brokolicov\\u00E1 pol\\u00E9vka se smetanou\",\"source\":\"https://www.recepty.cz/recept/brokolicova-polevka-se-smetanou-145785\",\"header\":{\"duration\":\"10 minut\",\"difficulty\":\"snadn\\u00E9\",\"portions\":4,\"portion_unit\":\"porce\"},\"steps\":[\"V\\u00A0hrnci na m\\u00E1sle a na mal\\u00E9m plameni osma\\u017Ete cibuli. P\\u0159idejte brokolici a brambory a zalijte v\\u00FDvarem. Va\\u0159te, a\\u017E jsou brambory a brokolice m\\u011Bkk\\u00E9.\",\"Potom pol\\u00E9vku rozmixujte na jemn\\u00FD kr\\u00E9m, p\\u0159ilijte smetanu a podle chuti osolte a opep\\u0159ete. Nechte je\\u0161t\\u011B kr\\u00E1tce proj\\u00EDt varem. Na tal\\u00ED\\u0159i zdobte krutony.\"],\"ingredients\":[[\"cibule\",\"1 ks\"],[\"brambory\",\"3 ks\"],[\"m\\u00E1slo\",\"2 l\\u017E\\u00EDce\"],[\"\",\"s\\u016Fl\"],[\"\",\"pep\\u0159 mlet\\u00FD\"],[\"smetana\",\"1 kel\\u00EDmek\"],[\"dr\\u016Fbe\\u017E\\u00ED v\\u00FDvar\",\"1 l\"],[\"brokolice\",\"500 g\"],[\"\",\"krutony\"]]}";
+        
+        var recipe = JsonSerializer.Deserialize<Recipe>(json);
+    }
 }
 
