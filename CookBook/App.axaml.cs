@@ -3,6 +3,8 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using CookBook.Models;
+using CookBook.Models.Settings;
 using CookBook.Services.Abstractions;
 using CookBook.Services.Core;
 using CookBook.ViewModels;
@@ -10,8 +12,11 @@ using CookBook.ViewModels.RecipeDetail;
 using CookBook.ViewModels.Timers;
 using CookBook.Views;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 
 namespace CookBook;
 
@@ -29,6 +34,7 @@ public partial class App : Application
         BindingPlugins.DataValidators.RemoveAt(0);
 
         var services = new ServiceCollection();
+        AddSettings(services);
         AddCommonServices(services);
 
         var serv = services.BuildServiceProvider();
@@ -43,6 +49,15 @@ public partial class App : Application
         //}
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private void AddSettings(IServiceCollection services)
+    {
+        using var stream = new FileInfo("appsettings.json").OpenText();
+        var data = stream.ReadToEnd();
+        var settings = JsonSerializer.Deserialize<Settings>(data);
+        if (settings is not null)
+            services.AddSingleton(typeof(ISettings), settings);
     }
 
     private void AddCommonServices(IServiceCollection services)

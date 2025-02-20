@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using CookBook.Services.Abstractions;
+using System.Collections.Generic;
 
 namespace CookBook.Models.Settings;
 
 /// <summary>
 /// Class representing settings from json config file
 /// </summary>
-public class Settings
+public class Settings : ISettings
 {
-    [JsonPropertyName("saved_timers")]
     public List<SavedTimer> SavedTimers { get; set; } = [];
+    public int TimerAdditionSeconds { get; set; } = 5;
 }
 

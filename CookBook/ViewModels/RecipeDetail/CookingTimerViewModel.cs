@@ -65,6 +65,11 @@ public partial class CookingTimerViewModel : ObservableObject
         StartText = FormatTime(Start);
     }
 
+    public void Pause()
+    {
+        IsRunning = !IsRunning;
+    }
+
     private void Recalculate()
     {
         IsDone = Elapsed <= TimeSpan.Zero;

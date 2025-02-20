@@ -4,7 +4,7 @@ using CookBook.Models;
 using CookBook.Services.Abstractions;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace CookBook.ViewModels.RecipeDetail;
@@ -12,6 +12,7 @@ public partial class RecipeDetailViewModel : ViewModelBase
 {
     private readonly IRecipeService _recipeService;
     private readonly ITimerService _timerService;
+    private readonly ISettings _settings;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public RecipeDetailViewModel()
@@ -67,10 +68,12 @@ public partial class RecipeDetailViewModel : ViewModelBase
 
     public RecipeDetailViewModel(
         IRecipeService recipeService,
-        ITimerService timerService)
+        ITimerService timerService,
+        ISettings settings)
     {
         _recipeService = recipeService;
         _timerService = timerService;
+        _settings = settings;
 
         InitCommands();
 
@@ -121,6 +124,16 @@ public partial class RecipeDetailViewModel : ViewModelBase
     [ObservableProperty]
     public ICommand? _plusPortionCommand;
 
+    [ObservableProperty]
+    public ICommand? _downTimerCommand;
+
+    [ObservableProperty]
+    public ICommand? _upTimerCommand;
+
+    [ObservableProperty]
+    public ICommand? _pauseTimerCommand;
+
+
     #endregion
 
     #region Command methods
@@ -129,6 +142,9 @@ public partial class RecipeDetailViewModel : ViewModelBase
     {
         MinusPortionCommand = new RelayCommand(MinusPortion);
         PlusPortionCommand = new RelayCommand(PlusPortion);
+        DownTimerCommand = new RelayCommand<CookingTimerViewModel>(DownTimer);
+        UpTimerCommand = new RelayCommand<CookingTimerViewModel>(UpTimer);
+        PauseTimerCommand = new RelayCommand<CookingTimerViewModel>(PauseTimer);
     }
 
     private void MinusPortion()
@@ -151,6 +167,29 @@ public partial class RecipeDetailViewModel : ViewModelBase
         PortionCounter++;
         IsMinusPortionButtonEnabled = true;
         RecalculateIngredientCounts();
+    }
+
+    private void DownTimer(CookingTimerViewModel? timer)
+    {
+        if (timer is null) return;
+
+        timer.Elapsed.Add(TimeSpan.FromSeconds(_settings.TimerAdditionSeconds));
+        timer.Update();
+    }
+
+    private void UpTimer(CookingTimerViewModel? timer)
+    {
+        if (timer is null) return;
+
+        timer.Elapsed.Add(-1 * TimeSpan.FromSeconds(_settings.TimerAdditionSeconds));
+        timer.Update();
+    }
+
+    private void PauseTimer(CookingTimerViewModel? timer)
+    {
+        if (timer is null) return;
+
+        timer.Pause();
     }
 
     #endregion
@@ -227,6 +266,7 @@ public partial class RecipeDetailViewModel : ViewModelBase
 
     private void UpdateTimers()
     {
+        Debug.Assert(Timers is not null);
         foreach (var timer in Timers)
         {
             timer.Update();

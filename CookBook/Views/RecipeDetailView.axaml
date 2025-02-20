@@ -42,7 +42,7 @@
                     <!--  Minus button  -->
                     <Button ctrls:IconSquareButtonExtensions.PathData="{StaticResource MinusIcon_Path}"
                             ctrls:IconSquareButtonExtensions.PathHeight="0"
-                            Classes="icon-square-si"
+                            Classes="icon-square"
                             Command="{Binding MinusPortionCommand}"
                             IsEnabled="{Binding IsMinusPortionButtonEnabled}" />
 
@@ -175,11 +175,13 @@
                                             Margin="4,0,0,0"
                                             Orientation="Horizontal"
                                             Spacing="6">
-                                    <!--  Big down  -->
+                                    <!--  Down  -->
                                     <Button ctrls:IconSquareButtonExtensions.PathData="{StaticResource DownIcon_Path}"
                                             ctrls:IconSquareButtonExtensions.PathHeight="20"
                                             ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
                                             ctrls:IconSquareButtonExtensions.PathWidth="20"
+                                            Command="{Binding DownTimerCommand}"
+                                            CommandParameter="{Binding}"
                                             Classes="icon-square">
                                         <Button.Background>
                                             <MultiBinding Converter="{x:Static conv:Converters.BooleanToColor}">
@@ -189,11 +191,13 @@
                                             </MultiBinding>
                                         </Button.Background>
                                     </Button>
-                                    <!--  Small down  -->
-                                    <Button ctrls:IconSquareButtonExtensions.PathData="{StaticResource DownIcon_Path}"
-                                            ctrls:IconSquareButtonExtensions.PathHeight="10"
-                                            ctrls:IconSquareButtonExtensions.PathStrokeThickness="2"
-                                            ctrls:IconSquareButtonExtensions.PathWidth="10"
+                                    <!--  Up  -->
+                                    <Button ctrls:IconSquareButtonExtensions.PathData="{StaticResource UpIcon_Path}"
+                                            ctrls:IconSquareButtonExtensions.PathHeight="20"
+                                            ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
+                                            ctrls:IconSquareButtonExtensions.PathWidth="20"
+                                            Command="{Binding UpTimerCommand}"
+                                            CommandParameter="{Binding}"
                                             Classes="icon-square">
                                         <Button.Background>
                                             <MultiBinding Converter="{x:Static conv:Converters.BooleanToColor}">
@@ -210,6 +214,8 @@
                                             ctrls:IconSquareButtonExtensions.PathHeight="30"
                                             ctrls:IconSquareButtonExtensions.PathStrokeThickness="2"
                                             ctrls:IconSquareButtonExtensions.PathWidth="30"
+                                            Command="{Binding PauseTimerCommand}"
+                                            CommandParameter="{Binding}"
                                             Classes="icon-square">
                                         <Button.Background>
                                             <MultiBinding Converter="{x:Static conv:Converters.BooleanToColor}">
@@ -217,24 +223,22 @@
                                                 <Binding Source="{StaticResource Attention}" />
                                                 <Binding Source="{StaticResource Secondary}" />
                                             </MultiBinding>
-                                        </Button.Background>
-                                    </Button>
-                                    <!--  Small up  -->
-                                    <Button ctrls:IconSquareButtonExtensions.PathData="{StaticResource UpIcon_Path}"
-                                            ctrls:IconSquareButtonExtensions.PathHeight="10"
-                                            ctrls:IconSquareButtonExtensions.PathStrokeThickness="2"
-                                            ctrls:IconSquareButtonExtensions.PathWidth="10"
-                                            Classes="icon-square">
-                                        <Button.Background>
-                                            <MultiBinding Converter="{x:Static conv:Converters.BooleanToColor}">
-                                                <Binding Path="IsDone" />
-                                                <Binding Source="{StaticResource Attention}" />
+
+                                            <!--<MultiBinding Converter="{x:Static conv:Converters.BooleanToColor}">
+                                                <Binding Path="IsRunning" />
                                                 <Binding Source="{StaticResource Secondary}" />
-                                            </MultiBinding>
+                                                <Binding Source="{StaticResource Attention}" />
+                                            </MultiBinding>-->
                                         </Button.Background>
                                     </Button>
-                                    <!--  Big up  -->
-                                    <Button ctrls:IconSquareButtonExtensions.PathData="{StaticResource UpIcon_Path}"
+
+                                    <!--  Filler  -->
+                                    <Button Width="40"
+                                            Height="40"
+                                            Background="Transparent" />
+
+                                    <!--  Close  -->
+                                    <Button ctrls:IconSquareButtonExtensions.PathData="{StaticResource CrossIcon_Path}"
                                             ctrls:IconSquareButtonExtensions.PathHeight="20"
                                             ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
                                             ctrls:IconSquareButtonExtensions.PathWidth="20"
@@ -242,8 +246,8 @@
                                         <Button.Background>
                                             <MultiBinding Converter="{x:Static conv:Converters.BooleanToColor}">
                                                 <Binding Path="IsDone" />
-                                                <Binding Source="{StaticResource Attention}" />
                                                 <Binding Source="{StaticResource Secondary}" />
+                                                <Binding Source="{StaticResource Attention}" />
                                             </MultiBinding>
                                         </Button.Background>
                                     </Button>

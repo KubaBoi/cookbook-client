@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using CookBook.Services.Abstractions;
 using CookBook.ViewModels.RecipeDetail;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
@@ -13,18 +12,23 @@ public partial class TimersViewModel : ViewModelBase
 {
     private readonly ITimerService _timeService;
     private readonly INavigationService _navigationService;
+    private readonly ISettings _settings;
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public TimersViewModel()
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     {
         InitSavedTimers();
     }
 
     public TimersViewModel(
         ITimerService timerService,
-        INavigationService navigationService)
+        INavigationService navigationService,
+        ISettings settings)
     {
         _timeService = timerService;
         _navigationService = navigationService;
+        _settings = settings;
 
         InitSavedTimers();
         InitCommands();
@@ -177,17 +181,12 @@ public partial class TimersViewModel : ViewModelBase
 
     private void InitSavedTimers()
     {
-        SavedTimers = new ()
+        SavedTimers = new ObservableCollection<CookingTimerViewModel>();
+        foreach (var savedTimer in _settings.SavedTimers)
         {
-            new CookingTimerViewModel(TimeSpan.FromMinutes(1)),
-            new CookingTimerViewModel(TimeSpan.FromMinutes(5)),
-            new CookingTimerViewModel(TimeSpan.FromMinutes(10)),
-            new CookingTimerViewModel(TimeSpan.FromMinutes(15)),
-            new CookingTimerViewModel(TimeSpan.FromHours(1)),
-            new CookingTimerViewModel(TimeSpan.FromHours(1.5)),
-            new CookingTimerViewModel(TimeSpan.FromHours(2)),
-            new CookingTimerViewModel(TimeSpan.FromHours(3)),
-        };
+            int seconds = (savedTimer.Hours * 60 * 60) + (savedTimer.Minutes * 60) + savedTimer.Seconds;
+            SavedTimers.Add(new CookingTimerViewModel(TimeSpan.FromSeconds(seconds)));
+        }
     }
 
     private void UpdateStartButtonEnabled()

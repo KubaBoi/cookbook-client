@@ -31,8 +31,8 @@ public partial class MainViewModel : ViewModelBase
 
         _navigationService.SetNavigationChangeHandler(ChangeView);
 
-        ChangeView(NavigationPath.Timers);
-        //ChangeView();
+        //ChangeView(NavigationPath.Timers);
+        ChangeView();
     }
 
     [ObservableProperty]
