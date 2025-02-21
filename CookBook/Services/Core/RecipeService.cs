@@ -24,7 +24,7 @@ public class RecipeService : IRecipeService
 
     public async Task UpdateRecipesFromServerAsync()
     {
-        var response = await _httpService.GetAsync("recipes", "get_all");
+        var response = await _httpService.GetCookBookAsync("recipes", "get_all");
 
         string content = await response.Content.ReadAsStringAsync();
         if (response.IsSuccessStatusCode is false)
@@ -32,7 +32,11 @@ public class RecipeService : IRecipeService
             throw new ServerException(response.StatusCode, content);
         }
 
-        List<Recipe> recipes = JsonSerializer.Deserialize<List<Recipe>>(content);
+        List<Recipe>? recipes = JsonSerializer.Deserialize<List<Recipe>>(content);
+        if (recipes is null)
+        {
+            throw new Exception("Recipes could not be load");
+        }
         var dir = _fileService.GetRecipeDirectory();
         foreach (var recipe in recipes)
         {
@@ -49,7 +53,9 @@ public class RecipeService : IRecipeService
         foreach (var file in files)
         {
             var data = _fileService.ReadFile(file);
-            recipes.Add(JsonSerializer.Deserialize<Recipe>(data));
+            var recipe = JsonSerializer.Deserialize<Recipe>(data);
+            if (recipe is not null)
+                recipes.Add(recipe);
         }
         return recipes;
     }

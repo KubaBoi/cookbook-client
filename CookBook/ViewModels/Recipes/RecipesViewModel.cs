@@ -5,6 +5,7 @@ using CookBook.Services.Abstractions;
 using CookBook.Services.Core;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CookBook.ViewModels.Recipes;
@@ -20,16 +21,17 @@ public partial class RecipesViewModel : ViewModelBase
     {
         Recipes = new ObservableCollection<RecipeInfoViewModel>()
         {
-            new RecipeInfoViewModel("Nejaka pochutina", "Velmi narocne", "30 hodin", 4, "pekace"),
-            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru"),
-            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru"),
-            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru"),
-            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru"),
-            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru"),
-            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru"),
-            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru"),
-            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru"),
-            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru")
+            new RecipeInfoViewModel("Nejaka pochutina", "Velmi narocne", "30 hodin", 4, "pekace", true),
+            new RecipeInfoViewModel("1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9 1 3 5 7 9",
+                                        "Velmi nenarocne", "3 hodiny", 5, "taliru", false),
+            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru", true),
+            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru", false),
+            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru", true),
+            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru", false),
+            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru", true),
+            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru", false),
+            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru", true),
+            new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru", false)
         };
     }
 
@@ -48,7 +50,7 @@ public partial class RecipesViewModel : ViewModelBase
     #region Properties
 
     [ObservableProperty]
-    private ObservableCollection<RecipeInfoViewModel> _recipes;
+    private ObservableCollection<RecipeInfoViewModel>? _recipes;
 
     #endregion
 
@@ -60,6 +62,9 @@ public partial class RecipesViewModel : ViewModelBase
     [ObservableProperty]
     private ICommand? _selectRecipeCommand;
 
+    [ObservableProperty]
+    private ICommand? _updateRecipesCommand;
+
     #endregion
 
     #region Command methods
@@ -68,6 +73,7 @@ public partial class RecipesViewModel : ViewModelBase
     {
         GoBackCommand = new RelayCommand(GoBack);
         SelectRecipeCommand = new RelayCommand<RecipeInfoViewModel?>(SelectRecipe);
+        UpdateRecipesCommand = new AsyncRelayCommand(UpdateRecipesAsync);
     }
 
     private void GoBack()
@@ -83,6 +89,12 @@ public partial class RecipesViewModel : ViewModelBase
         GoBack();
     }
 
+    private async Task UpdateRecipesAsync()
+    {
+        await _recipeService.UpdateRecipesFromServerAsync();
+        LoadRecipes();
+    }
+
     #endregion
 
     #region Public methods
@@ -94,16 +106,23 @@ public partial class RecipesViewModel : ViewModelBase
 
     public void Loaded()
     {
-        Recipes = new ObservableCollection<RecipeInfoViewModel>();
-        foreach (var recipe in _recipeService.ReadAllRecipes())
-        {
-            Recipes.Add(new RecipeInfoViewModel(recipe));
-        }
+        LoadRecipes();
     }
 
     #endregion
 
     #region Private methods
+
+    private void LoadRecipes()
+    {
+        Recipes = new ObservableCollection<RecipeInfoViewModel>();
+        var loadedRecipes = _recipeService.ReadAllRecipes();
+        for (int i = 0; i < loadedRecipes.Count; i++)
+        {
+            var recipe = loadedRecipes[i];
+            Recipes.Add(new RecipeInfoViewModel(recipe, i % 2 == 0));
+        }
+    }
 
     #endregion
 }

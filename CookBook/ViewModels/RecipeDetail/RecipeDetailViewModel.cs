@@ -83,41 +83,6 @@ public partial class RecipeDetailViewModel : ViewModelBase
         _navigationService = navigationService;
 
         InitCommands();
-
-        // TODO docasne
-        _recipe = new Recipe()
-        {
-            Name = "Koláč s čokoládou",
-            Source = "https://source.com",
-            Header = new Header()
-            {
-                Duration = "90 minut",
-                Difficulty = "Snadná",
-                Portions = 4,
-                PortionUnit = "porce"
-            },
-            Steps = new List<string>
-            {
-                "Troubu předehřejte na 180 °C. Kulatou formu o průměru asi 28 cm nebo plech s vyššími okraji vymažte máslem a vysypte hrubou moukou.",
-                "Suroviny na drobenku propracujte prsty a hotovou drobenku prozatím uložte do lednice.",
-                "V míse utřete vejce s cukrem do světlé pěny, vmíchejte smetanu, prosátou mouku smíchanou s kypřicím práškem do pečiva a dobře promíchejte.",
-                "Těsto opatrně roztáhněte pomocí stěrky po celé ploše formy, poklaďte je rovnoměrně ovocem – banánem a rybízem – a nakonec na ně rozprostřete drobenku.",
-                "Vložte do trouby a pečte 25–30 minut, až drobenka zezlátne a bude křupavá (pokud použijete ovoce s větším obsahem vody, pečte koláč o 5 minut déle).",
-                "TIPY A TRIKY\r\nK některým druhům ovoce, například jablkům nebo hruškám, ladí dobře skořice, k jiným (rybízu nebo višním) je zase zajímavá vanilka – nahraďte podle použitého ovoce adekvátní část krupicového cukru v drobence vanilkovým nebo skořicovým cukrem. Pokud použijete hodně kyselé ovoce, můžete přidat do drobenky o lžíci cukru a kousek másla víc."
-            },
-            Ingredients = new List<Ingredient>
-            {
-                new Ingredient("párek", 5, "krát"),
-                new Ingredient("cibule", 4, "ks"),
-                new Ingredient("oleje", 5, "lžic"),
-                new Ingredient("rybízu", 700, "g"),
-                new Ingredient("Na drobenku"),
-                new Ingredient("Krupicový cukr", 5, "krát"),
-                new Ingredient("párek", 5, "krát"),
-                new Ingredient("Vanilkový cukraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 5, "krát"),
-            }
-        };
-        _recipeService.SelectedRecipe = _recipe;
     }
 
     #region Properties
@@ -270,7 +235,7 @@ public partial class RecipeDetailViewModel : ViewModelBase
         {
             MainTitle = Recipe.Name;
             MainTitleFontSize = 40;
-            if (MainTitle is null || MainTitle.Length > 70)
+            if (MainTitle is null || MainTitle.Length > 40)
                 MainTitleFontSize = 20;
 
             PortionCounter = Recipe.Header?.Portions;
@@ -286,6 +251,8 @@ public partial class RecipeDetailViewModel : ViewModelBase
 
     private void RecalculateIngredientCounts()
     {
+        if (Ingredients is null)
+            return;
         foreach (var ing in Ingredients)
         {
             ing.Count = ing.NormalCount * PortionCounter;

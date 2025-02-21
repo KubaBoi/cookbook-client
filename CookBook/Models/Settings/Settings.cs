@@ -8,7 +8,8 @@ namespace CookBook.Models.Settings;
 /// </summary>
 public class Settings : ISettings
 {
-    public List<SavedTimer> SavedTimers { get; set; } = [];
+    public Urls? Urls { get; set; }
     public int TimerAdditionSeconds { get; set; } = 5;
+    public List<SavedTimer> SavedTimers { get; set; } = [];
 }
 

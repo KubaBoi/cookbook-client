@@ -1,6 +1,6 @@
 ﻿using CookBook.Services.Abstractions;
 using System;
-using System.Linq;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 namespace CookBook.Services.Core;
 public class HttpService : IHttpService
 {
-    private readonly HttpClient _client;
+    private readonly HttpClient? _client;
+    private readonly ISettings _settings;
 
-    public HttpService()
+    public HttpService(ISettings settings)
     {
         HttpClientHandler handler = new HttpClientHandler
         {
@@ -19,38 +20,57 @@ public class HttpService : IHttpService
         };
 
         _client = new HttpClient();
+        _settings = settings;
     }
 
-    public async Task<HttpResponseMessage> GetAsync(params string[] uriParts)
+    public async Task<HttpResponseMessage> GetCookBookAsync(params string[] urlParts)
     {
-        StringBuilder builder = new StringBuilder();
-        builder.Append(Constants.SERVER_URL);
-        builder.Append(':');
-        builder.Append(Constants.SERVER_PORT);
-
-        foreach (var uriPart in uriParts)
-        {
-            builder.Append('/');
-            builder.Append(uriPart);
-        }
-
-        return await _client.GetAsync(builder.ToString());
+        return await GetAsync(_settings.Urls.CookBook, urlParts);
     }
 
-    public async Task<string> PostAsync(string uri, string data, string contentType)
+    public async Task<HttpResponseMessage> GetAsync(string serverAddr, params string[] urlParts)
     {
-        using HttpContent content = new StringContent(data, Encoding.UTF8, contentType);
+        Debug.Assert(_client is not null);
 
+        var url = BuildUrl(serverAddr, urlParts);
+        return await _client.GetAsync(url);
+    }
+
+    public async Task<string> PostCookBookAsync(string data, params string[] urlParts)
+    {
+        return await PostAsync(data, _settings.Urls.CookBook, urlParts);
+    }
+
+    public async Task<string> PostAsync(string data, string serverAddr, params string[] urlParts)
+    {
+        Debug.Assert(_client is not null);
+
+        using HttpContent content = new StringContent(data,
+                                                      Encoding.UTF8,
+                                                      "application/json");
+        var url = BuildUrl(serverAddr, urlParts);
         HttpRequestMessage requestMessage = new HttpRequestMessage()
         {
             Content = content,
             Method = HttpMethod.Post,
-            RequestUri = new Uri(uri)
+            RequestUri = new Uri(url)
         };
 
         using HttpResponseMessage response = await _client.SendAsync(requestMessage);
-
         return await response.Content.ReadAsStringAsync();
+    }
+
+    private string BuildUrl(string? url, params string[] urlParts)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append(url);
+
+        foreach (var uriPart in urlParts)
+        {
+            builder.Append('/');
+            builder.Append(uriPart);
+        }
+        return builder.ToString();
     }
 }
 

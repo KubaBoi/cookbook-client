@@ -5,7 +5,8 @@ namespace CookBook.Services.Abstractions;
 
 public interface ISettings
 {
-    List<SavedTimer> SavedTimers { get; set; }
+    Urls Urls { get; set; }
     int TimerAdditionSeconds { get; set; }
+    List<SavedTimer> SavedTimers { get; set; }
 }
 
