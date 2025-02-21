@@ -7,7 +7,7 @@ using Avalonia.Media;
 /// <summary>
 /// Choose one of two font weights from arguments based on boolean values.
 /// Argumets are boolean, FotnWeight, and FontWeight.
-/// First FotnWeight is returned if boolean is true.
+/// First FontWeight is returned if boolean is true.
 /// </summary>
 namespace CookBook.Converters;
 public class BooleanToFontWeightConverter : IMultiValueConverter

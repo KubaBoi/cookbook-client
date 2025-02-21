@@ -9,6 +9,7 @@ public partial class RecipeInfoViewModel : ObservableObject
     {
         Debug.Assert(recipe.Header is not null);
 
+        Recipe = recipe;
         Name = recipe.Name?? "Missing Name";
         Difficulty = recipe.Header.Difficulty ?? "Missing Difficulty";
         Duration = recipe.Header.Duration?? "Missing Duration";
@@ -24,6 +25,8 @@ public partial class RecipeInfoViewModel : ObservableObject
         Portions = portions;
         PortionUnit = portionUnit;
     }
+
+    public Recipe? Recipe { get; set; }
 
     [ObservableProperty]
     private string _name;

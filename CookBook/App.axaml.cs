@@ -3,7 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using CookBook.Models;
 using CookBook.Models.Settings;
 using CookBook.Services.Abstractions;
 using CookBook.Services.Core;
@@ -13,10 +12,7 @@ using CookBook.ViewModels.Recipes;
 using CookBook.ViewModels.Timers;
 using CookBook.Views;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace CookBook;

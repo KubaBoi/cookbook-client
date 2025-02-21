@@ -1,7 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CookBook.Models;
 using CookBook.Services.Abstractions;
+using CookBook.Services.Core;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows.Input;
 
 namespace CookBook.ViewModels.Recipes;
 public partial class RecipesViewModel : ViewModelBase
@@ -37,6 +41,8 @@ public partial class RecipesViewModel : ViewModelBase
         _recipeService = recipeService;
         _settings = settings;
         _navigationService = navigationService;
+
+        InitCommands();
     }
 
     #region Properties
@@ -48,9 +54,34 @@ public partial class RecipesViewModel : ViewModelBase
 
     #region Commands
 
+    [ObservableProperty]
+    private ICommand? _goBackCommand;
+
+    [ObservableProperty]
+    private ICommand? _selectRecipeCommand;
+
     #endregion
 
     #region Command methods
+
+    private void InitCommands()
+    {
+        GoBackCommand = new RelayCommand(GoBack);
+        SelectRecipeCommand = new RelayCommand<RecipeInfoViewModel?>(SelectRecipe);
+    }
+
+    private void GoBack()
+    {
+        _navigationService.Navigate(NavigationPath.RecipeDetail);
+    }
+
+    private void SelectRecipe(RecipeInfoViewModel? recipeInfo)
+    {
+        Debug.Assert(recipeInfo is not null);
+
+        _recipeService.SelectedRecipe = recipeInfo.Recipe;
+        GoBack();
+    }
 
     #endregion
 

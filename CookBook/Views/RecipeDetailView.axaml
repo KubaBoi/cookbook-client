@@ -20,10 +20,12 @@
                    Grid.Column="0"
                    Grid.ColumnSpan="2"
                    Margin="10,10,0,0"
-                   FontSize="40"
+                   FontSize="{Binding MainTitleFontSize}"
                    FontWeight="SemiBold"
                    Foreground="{DynamicResource Primary}"
-                   Text="{Binding MainTitle}" />
+                   Text="{Binding MainTitle}"
+                   TextWrapping="Wrap">
+        </TextBlock>
 
         <!--  Ingredience  -->
         <Border Grid.Row="1"
@@ -70,59 +72,61 @@
                         DockPanel.Dock="Top" />
 
                 <!--  List of ingredients  -->
-                <ItemsControl Padding="10,0"
-                              x:DataType="vm:IngredientViewModel"
-                              Grid.IsSharedSizeScope="True"
-                              ItemsSource="{Binding Ingredients}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"
-                                                      SharedSizeGroup="A" />
-                                    <ColumnDefinition Width="10" />
-                                    <ColumnDefinition Width="*"
-                                                      SharedSizeGroup="B" />
-                                </Grid.ColumnDefinitions>
+                <ScrollViewer>
+                    <ItemsControl Padding="10,0"
+                                  x:DataType="vm:IngredientViewModel"
+                                  Grid.IsSharedSizeScope="True"
+                                  ItemsSource="{Binding Ingredients}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"
+                                                          SharedSizeGroup="A" />
+                                        <ColumnDefinition Width="10" />
+                                        <ColumnDefinition Width="*"
+                                                          SharedSizeGroup="B" />
+                                    </Grid.ColumnDefinitions>
 
-                                <!--  Count and unit  -->
-                                <TextBlock Grid.Column="0"
-                                           MaxWidth="70"
-                                           Margin="0,1"
-                                           FontWeight="Bold"
-                                           Foreground="{DynamicResource Primary}"
-                                           IsVisible="{Binding !IsTitle}"
-                                           TextWrapping="Wrap">
-                                    <Run Text="{Binding Count}" />
-                                    <Run Text="{Binding Unit}" />
-                                </TextBlock>
+                                    <!--  Count and unit  -->
+                                    <TextBlock Grid.Column="0"
+                                               MaxWidth="70"
+                                               Margin="0,1"
+                                               FontWeight="Bold"
+                                               Foreground="{DynamicResource Primary}"
+                                               IsVisible="{Binding !IsTitle}"
+                                               TextWrapping="Wrap">
+                                        <Run Text="{Binding Count}" />
+                                        <Run Text="{Binding Unit}" />
+                                    </TextBlock>
 
-                                <!--  Name of ingredient  -->
-                                <TextBlock Grid.Column="2"
-                                           Width="160"
-                                           Padding="0,0,20,0"
-                                           FontSize="14"
-                                           FontWeight="Normal"
-                                           Foreground="{DynamicResource Primary}"
-                                           IsVisible="{Binding !IsTitle}"
-                                           Text="{Binding Name}"
-                                           TextWrapping="Wrap" />
+                                    <!--  Name of ingredient  -->
+                                    <TextBlock Grid.Column="2"
+                                               Width="160"
+                                               Padding="0,0,20,0"
+                                               FontSize="14"
+                                               FontWeight="Normal"
+                                               Foreground="{DynamicResource Primary}"
+                                               IsVisible="{Binding !IsTitle}"
+                                               Text="{Binding Name}"
+                                               TextWrapping="Wrap" />
 
-                                <!--  Name of title  -->
-                                <TextBlock Grid.Column="2"
-                                           Width="170"
-                                           Margin="0,19,0,6"
-                                           FontSize="16"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource Secondary}"
-                                           IsVisible="{Binding IsTitle}"
-                                           Text="{Binding Name}"
-                                           TextWrapping="Wrap" />
+                                    <!--  Name of title  -->
+                                    <TextBlock Grid.Column="2"
+                                               Width="170"
+                                               Margin="0,19,0,6"
+                                               FontSize="16"
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource Secondary}"
+                                               IsVisible="{Binding IsTitle}"
+                                               Text="{Binding Name}"
+                                               TextWrapping="Wrap" />
 
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
             </DockPanel>
         </Border>
 

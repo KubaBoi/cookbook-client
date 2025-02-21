@@ -129,6 +129,9 @@ public partial class RecipeDetailViewModel : ViewModelBase
     private string? _mainTitle;
 
     [ObservableProperty]
+    private double _mainTitleFontSize = 40;
+
+    [ObservableProperty]
     private int? _portionCounter;
 
     [ObservableProperty]
@@ -266,6 +269,10 @@ public partial class RecipeDetailViewModel : ViewModelBase
         if (Recipe is not null)
         {
             MainTitle = Recipe.Name;
+            MainTitleFontSize = 40;
+            if (MainTitle is null || MainTitle.Length > 70)
+                MainTitleFontSize = 20;
+
             PortionCounter = Recipe.Header?.Portions;
             InitSteps();
             InitIngredients();
