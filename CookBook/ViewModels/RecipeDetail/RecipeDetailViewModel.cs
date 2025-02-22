@@ -235,8 +235,12 @@ public partial class RecipeDetailViewModel : ViewModelBase
         {
             MainTitle = Recipe.Name;
             MainTitleFontSize = 40;
-            if (MainTitle is null || MainTitle.Length > 40)
-                MainTitleFontSize = 20;
+            if (MainTitle?.Length > 40)
+            {
+                MainTitleFontSize = 30;
+                if (MainTitle?.Length > 130)
+                    MainTitleFontSize = 14;
+            }
 
             PortionCounter = Recipe.Header?.Portions;
             InitSteps();

@@ -33,6 +33,8 @@ public partial class RecipesViewModel : ViewModelBase
             new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru", true),
             new RecipeInfoViewModel("Nejaka pochutina dva", "Velmi nenarocne", "3 hodiny", 5, "taliru", false)
         };
+
+        _isDialogVisible = true;
     }
 
     public RecipesViewModel(
@@ -52,6 +54,9 @@ public partial class RecipesViewModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<RecipeInfoViewModel>? _recipes;
 
+    [ObservableProperty]
+    private bool _isDialogVisible = false;
+
     #endregion
 
     #region Commands
@@ -61,6 +66,9 @@ public partial class RecipesViewModel : ViewModelBase
 
     [ObservableProperty]
     private ICommand? _selectRecipeCommand;
+
+    [ObservableProperty]
+    private ICommand? _addRecipeCommand;
 
     [ObservableProperty]
     private ICommand? _updateRecipesCommand;
@@ -73,6 +81,7 @@ public partial class RecipesViewModel : ViewModelBase
     {
         GoBackCommand = new RelayCommand(GoBack);
         SelectRecipeCommand = new RelayCommand<RecipeInfoViewModel?>(SelectRecipe);
+        AddRecipeCommand = new AsyncRelayCommand(AddRecipeAsync);
         UpdateRecipesCommand = new AsyncRelayCommand(UpdateRecipesAsync);
     }
 
@@ -87,6 +96,11 @@ public partial class RecipesViewModel : ViewModelBase
 
         _recipeService.SelectedRecipe = recipeInfo.Recipe;
         GoBack();
+    }
+
+    private async Task AddRecipeAsync()
+    {
+        IsDialogVisible = !IsDialogVisible;
     }
 
     private async Task UpdateRecipesAsync()

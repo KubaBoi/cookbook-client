@@ -12,6 +12,8 @@ public interface IRecipeService
 
     Task UpdateRecipesFromServerAsync();
 
+    Task UpdateRecipeFromServerAsync(string id);
+
     List<Recipe> ReadAllRecipes();
 }
 
