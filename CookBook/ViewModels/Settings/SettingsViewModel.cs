@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -74,9 +75,16 @@ public partial class SettingsViewModel : ViewModelBase
     {
         Items = new ObservableCollection<SettingsItemViewModel>
         {
-            new SettingsItemViewModel("Verze", ""),
+            new SettingsItemViewModel("Verze", GetVersion()),
             new SettingsItemViewModel("", "")
         };
+    }
+
+    private string GetVersion()
+    {
+        return Assembly.GetExecutingAssembly()
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+            ?? "Unknown";
     }
 
     #endregion
