@@ -46,8 +46,8 @@
                     <!--  Update recipes  -->
                     <Button Width="70"
                             Height="70"
-                            ctrls:IconSquareButtonExtensions.PathData="{StaticResource RecipeAddIcon_Path}"
-                            ctrls:IconSquareButtonExtensions.PathHeight="40"
+                            ctrls:IconSquareButtonExtensions.PathData="{StaticResource SyncCloudIcon_Path}"
+                            ctrls:IconSquareButtonExtensions.PathHeight="30"
                             ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
                             ctrls:IconSquareButtonExtensions.PathWidth="40"
                             Classes="icon-square"

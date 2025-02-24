@@ -368,6 +368,17 @@
                             Classes="icon-square"
                             Command="{Binding GoToTimersViewCommand}"
                             CornerRadius="100" />
+
+                    <!-- Settings -->
+                    <Button Width="70"
+                            Height="70"
+                            ctrls:IconSquareButtonExtensions.PathData="{StaticResource SettingsIcon_Path}"
+                            ctrls:IconSquareButtonExtensions.PathHeight="40"
+                            ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
+                            ctrls:IconSquareButtonExtensions.PathWidth="35"
+                            Classes="icon-square"
+                            Command="{Binding GoToSettingsViewCommand}"
+                            CornerRadius="100" />
                 </StackPanel>
             </Grid>
         </Border>

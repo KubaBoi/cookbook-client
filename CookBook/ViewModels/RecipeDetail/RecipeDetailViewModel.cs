@@ -139,6 +139,9 @@ public partial class RecipeDetailViewModel : ViewModelBase
     [ObservableProperty]
     private ICommand? _goToRecipesViewCommand;
 
+    [ObservableProperty]
+    private ICommand? _goToSettingsViewCommand;
+
     #endregion
 
     #region Command methods
@@ -153,6 +156,7 @@ public partial class RecipeDetailViewModel : ViewModelBase
         DeleteTimerCommand = new RelayCommand<CookingTimerViewModel?>(DeleteTimer);
         GoToTimersViewCommand = new RelayCommand(GoToTimersView);
         GoToRecipesViewCommand = new RelayCommand(GoToRecipesView);
+        GoToSettingsViewCommand = new RelayCommand(GoToSettingsView);
     }
 
     private void MinusPortion()
@@ -217,6 +221,11 @@ public partial class RecipeDetailViewModel : ViewModelBase
     private void GoToRecipesView()
     {
         _navigationService.Navigate(NavigationPath.RecipeSelection);
+    }
+
+    private void GoToSettingsView()
+    {
+        _navigationService.Navigate(NavigationPath.Settings);
     }
 
     #endregion

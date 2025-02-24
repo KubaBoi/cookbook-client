@@ -9,6 +9,7 @@ using CookBook.Services.Core;
 using CookBook.ViewModels;
 using CookBook.ViewModels.RecipeDetail;
 using CookBook.ViewModels.Recipes;
+using CookBook.ViewModels.Settings;
 using CookBook.ViewModels.Timers;
 using CookBook.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -72,6 +73,7 @@ public partial class App : Application
         services.AddView<RecipeDetailView, RecipeDetailViewModel>();
         services.AddView<TimersView, TimersViewModel>();
         services.AddView<RecipesView, RecipesViewModel>();
+        services.AddView<SettingsView, SettingsViewModel>();
 
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<MainWindow>();

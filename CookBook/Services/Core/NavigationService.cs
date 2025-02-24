@@ -26,6 +26,7 @@ public enum NavigationPath
 {
     RecipeDetail,
     RecipeSelection,
-    Timers
+    Timers,
+    Settings
 }
 
