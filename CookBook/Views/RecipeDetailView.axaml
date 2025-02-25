@@ -288,7 +288,9 @@
                                             <!--  Filler  -->
                                             <Button Width="40"
                                                     Height="40"
-                                                    Background="Transparent" />
+                                                    Background="Transparent"
+                                                    IsHitTestVisible="False"
+                                                    Opacity="0" />
 
                                             <!--  Close  -->
                                             <Button ctrls:IconSquareButtonExtensions.PathData="{StaticResource CrossIcon_Path}"
@@ -369,7 +371,7 @@
                             Command="{Binding GoToTimersViewCommand}"
                             CornerRadius="100" />
 
-                    <!-- Settings -->
+                    <!--  Settings  -->
                     <Button Width="70"
                             Height="70"
                             ctrls:IconSquareButtonExtensions.PathData="{StaticResource SettingsIcon_Path}"
