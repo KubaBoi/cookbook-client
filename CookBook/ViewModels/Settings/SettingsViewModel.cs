@@ -16,6 +16,7 @@ public partial class SettingsViewModel : ViewModelBase
 {
     private readonly ISettings _settings;
     private readonly INavigationService _navigationService;
+    private readonly IFileService _fileService;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     public SettingsViewModel()
@@ -32,10 +33,12 @@ public partial class SettingsViewModel : ViewModelBase
 
     public SettingsViewModel(
         ISettings settings,
-        INavigationService navigationService)
+        INavigationService navigationService,
+        IFileService fileService)
     {
         _settings = settings;
         _navigationService = navigationService;
+        _fileService = fileService;
 
         InitCommands();
         InitItems();
@@ -44,7 +47,7 @@ public partial class SettingsViewModel : ViewModelBase
     #region Properties
 
     [ObservableProperty]
-    private ObservableCollection<SettingsItemViewModel> _items;
+    private ObservableCollection<SettingsItemViewModel>? _items;
 
     #endregion
 
@@ -76,7 +79,8 @@ public partial class SettingsViewModel : ViewModelBase
         Items = new ObservableCollection<SettingsItemViewModel>
         {
             new SettingsItemViewModel("Verze", GetVersion()),
-            new SettingsItemViewModel("", "")
+            new SettingsItemViewModel("AppDir", _fileService.GetAppDirectory().FullName),
+            new SettingsItemViewModel("RecipeDir", _fileService.GetRecipeDirectory().FullName)
         };
     }
 

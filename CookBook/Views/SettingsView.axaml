@@ -14,8 +14,8 @@
           RowDefinitions="100, *">
         <Button Grid.Row="0"
                 Width="70"
-                Margin="10"
                 Height="70"
+                Margin="10"
                 ctrls:IconSquareButtonExtensions.PathData="{StaticResource BackIcon_Path}"
                 ctrls:IconSquareButtonExtensions.PathHeight="40"
                 ctrls:IconSquareButtonExtensions.PathStrokeThickness="3"
@@ -29,23 +29,21 @@
                           ItemsSource="{Binding Items}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid RowDefinitions="* 1">
+                        <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="100"
+                                <ColumnDefinition Width="200"
                                                   SharedSizeGroup="A" />
+                                <ColumnDefinition Width="20" />
                                 <ColumnDefinition Width="*"
                                                   SharedSizeGroup="B" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0"
                                        Foreground="{DynamicResource Primary}"
-                                       Text="{Binding Name}" />
-                            <TextBlock Grid.Column="1"
-                                       Foreground="{DynamicResource Primary}"
-                                       Text="{Binding Value}" />
-                            <Border Grid.Row="1"
-                                    Grid.Column="0"
-                                    Grid.ColumnSpan="2"
-                                    Background="{DynamicResource Primary}" />
+                                       Text="{Binding Name}"
+                                       TextWrapping="Wrap" />
+                            <TextBox Grid.Column="2"
+                                     Foreground="{DynamicResource Primary}"
+                                     Text="{Binding Value}" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
